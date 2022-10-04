@@ -1,0 +1,78 @@
+.root {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--primary-background-color);
+  align-items: center;
+  justify-content: flex-start;
+}
+.container {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background-color: var(--primary-background-color);
+  align-items: center;
+  justify-content: flex-start;
+  margin-top: 20vh;
+  color: var(--primary-color);
+  .title {
+    font-size: 1.5rem;
+    line-height: 3.875rem;
+    color: var(--primary-color);
+  }
+  .tips {
+    font-size: 1rem;
+    line-height: 3rem;
+  }
+  .action {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    .item {
+      color: var(--primary-color);
+      font-size: 1rem;
+      cursor: pointer;
+      position: relative;
+      &::after {
+        content: '';
+        position: absolute;
+        height: 0.125rem;
+        width: 100%;
+        background-color: var(--primary-color);
+        bottom: -0.3125rem;
+        left: 0;
+        opacity: 0;
+        transform: scale(0);
+        transition: all 0.2s;
+      }
+      &:hover {
+        &::after {
+          transform: scale(1);
+          opacity: 1;
+          transition: all 0.2s;
+        }
+      }
+    }
+  }
+}
+.copyright {
+  line-height: 2rem;
+  color: var(--primary-color);
+  font-size: 0.875rem;
+  opacity: 0.7;
+  transition: all 0.2s;
+  &:has(a:hover) {
+    opacity: 1;
+  }
+  .link {
+    cursor: pointer;
+    font-weight: bold;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

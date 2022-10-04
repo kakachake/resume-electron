@@ -1,11 +1,13 @@
-const path = require("path");
-const { CleanWebpackPlugin } = require("clean-webpack-plugin");
+const path = require('path');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   resolve: {
-    extensions: [".js", ".jsx", ".ts", ".tsx"],
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
-      "@": path.resolve(__dirname, "../app/renderer"),
+      '@assets': path.resolve(__dirname, '../assets'),
+      '@root': path.resolve(__dirname, '../'),
+      '@src': path.resolve(__dirname, '../app/renderer'),
     },
   },
   module: {
@@ -14,7 +16,7 @@ module.exports = {
         test: /\.(js|jsx|ts|tsx)$/,
         exclude: /node_modules/,
         use: {
-          loader: "babel-loader",
+          loader: 'babel-loader',
         },
       },
     ],

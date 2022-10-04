@@ -10,13 +10,15 @@
     "jsx": "react-jsx" /* Specify JSX code generation: 'preserve', 'react-native', or 'react'. */,
     "sourceMap": true,
     "strict": true,
-    "declaration": true,
+    "declaration": false,
     "removeComments": true /* 编译结果把ts的注释移除掉 */,
     "esModuleInterop": true /* es6的模块化和非es6的模块化标准互通 */,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
     "paths": {
-      "@/*": ["./app/renderer/*"] // webpack 配置别名，但在TS中会报红找不到，所以tslint也需要配置
+      "@assets/*": ["./assets/*"],
+      "@root/*": ["./*"],
+      "@src/*": ["./app/renderer/*"]
     },
     "moduleResolution": "node",
     "plugins": [{ "name": "typescript-plugin-css-modules" }]

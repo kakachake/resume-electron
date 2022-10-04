@@ -9,6 +9,7 @@ specifiers:
   '@types/node': ^18.8.0
   '@types/react': ^18.0.21
   '@types/react-dom': ^18.0.6
+  '@types/redux-logger': ^3.0.9
   '@typescript-eslint/eslint-plugin': ^5.38.1
   '@typescript-eslint/parser': ^5.38.1
   autoprefixer: ^10.4.12
@@ -17,6 +18,7 @@ specifiers:
   commitizen: ^4.2.5
   concurrently: ^7.4.0
   core-js: ^3.25.4
+  cross-env: ^7.0.3
   css-loader: ^6.7.1
   cz-conventional-changelog: ^3.3.0
   electron: ^21.0.1
@@ -32,10 +34,12 @@ specifiers:
   less-loader: ^11.0.0
   postcss: ^8.4.17
   postcss-loader: ^7.0.1
+  prettier: ^2.7.1
   react: ^18.2.0
   react-dom: ^18.2.0
   react-redux: ^8.0.4
   react-router-dom: ^6.4.1
+  redux-logger: ^3.0.6
   redux-thunk: ^2.4.1
   regenerator-runtime: ^0.13.9
   style-loader: ^3.3.1
@@ -54,6 +58,7 @@ dependencies:
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
   react-redux: registry.npmmirror.com/react-redux/8.0.4_5uumaiclxbdbzaqafclbf6maf4
   react-router-dom: registry.npmmirror.com/react-router-dom/6.4.1_biqbaboplfbrettd7655fr4n2y
+  redux-logger: registry.npmmirror.com/redux-logger/3.0.6
   redux-thunk: registry.npmmirror.com/redux-thunk/2.4.1
   regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.9
 
@@ -65,6 +70,7 @@ devDependencies:
   '@types/node': registry.npmmirror.com/@types/node/18.8.0
   '@types/react': registry.npmmirror.com/@types/react/18.0.21
   '@types/react-dom': registry.npmmirror.com/@types/react-dom/18.0.6
+  '@types/redux-logger': registry.npmmirror.com/@types/redux-logger/3.0.9
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.38.1_c7qepppml3d4ahu5cnfwqe6ltq
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.38.1_ypn2ylkkyfa5i233caldtndbqa
   autoprefixer: registry.npmmirror.com/autoprefixer/10.4.12_postcss@8.4.17
@@ -72,12 +78,13 @@ devDependencies:
   clean-webpack-plugin: registry.npmmirror.com/clean-webpack-plugin/4.0.0_webpack@5.74.0
   commitizen: registry.npmmirror.com/commitizen/4.2.5
   concurrently: registry.npmmirror.com/concurrently/7.4.0
+  cross-env: registry.npmmirror.com/cross-env/7.0.3
   css-loader: registry.npmmirror.com/css-loader/6.7.1_webpack@5.74.0
   cz-conventional-changelog: registry.npmmirror.com/cz-conventional-changelog/3.3.0
   eslint: registry.npmmirror.com/eslint/8.24.0
   eslint-config-alloy: registry.npmmirror.com/eslint-config-alloy/4.7.0_lxxooukv36tpgurcevssrl2aqm
   eslint-config-prettier: registry.npmmirror.com/eslint-config-prettier/8.5.0_eslint@8.24.0
-  eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/4.2.1_awmkh7s2gfwufkvh6fnk6cae3q
+  eslint-plugin-prettier: registry.npmmirror.com/eslint-plugin-prettier/4.2.1_cfn5x6ujhhgzv3423d6k7r2zzm
   eslint-plugin-react-hooks: registry.npmmirror.com/eslint-plugin-react-hooks/4.6.0_eslint@8.24.0
   eslint-webpack-plugin: registry.npmmirror.com/eslint-webpack-plugin/3.2.0_j6jdqc6yj4dakyrvwvnzxinrfq
   html-webpack-plugin: registry.npmmirror.com/html-webpack-plugin/5.5.0_webpack@5.74.0
@@ -86,6 +93,7 @@ devDependencies:
   less-loader: registry.npmmirror.com/less-loader/11.0.0_less@4.1.3+webpack@5.74.0
   postcss: registry.npmmirror.com/postcss/8.4.17
   postcss-loader: registry.npmmirror.com/postcss-loader/7.0.1_sat2ilddhdkv6huwh4d4inpfry
+  prettier: registry.npmmirror.com/prettier/2.7.1
   style-loader: registry.npmmirror.com/style-loader/3.3.1_webpack@5.74.0
   typescript: registry.npmmirror.com/typescript/4.8.4
   typescript-plugin-css-modules: registry.npmmirror.com/typescript-plugin-css-modules/3.4.0_typescript@4.8.4
@@ -2192,6 +2200,14 @@ packages:
       '@types/scheduler': registry.npmmirror.com/@types/scheduler/0.16.2
       csstype: registry.npmmirror.com/csstype/3.1.1
 
+  registry.npmmirror.com/@types/redux-logger/3.0.9:
+    resolution: {integrity: sha512-cwYhVbYNgH01aepeMwhd0ABX6fhVB2rcQ9m80u8Fl50ZODhsZ8RhQArnLTkE7/Zrfq4Sz/taNoF7DQy9pCZSKg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/redux-logger/-/redux-logger-3.0.9.tgz}
+    name: '@types/redux-logger'
+    version: 3.0.9
+    dependencies:
+      redux: registry.npmmirror.com/redux/4.2.0
+    dev: true
+
   registry.npmmirror.com/@types/responselike/1.0.0:
     resolution: {integrity: sha512-85Y2BjiufFzaMIlvJDvTTB8Fxl2xfLo4HgmHzVBz08w4wDePCTjYw66PdrolO0kzli3yam/YCgRufyo1DdQVTA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/responselike/-/responselike-1.0.0.tgz}
     name: '@types/responselike'
@@ -3515,6 +3531,16 @@ packages:
     dev: true
     optional: true
 
+  registry.npmmirror.com/cross-env/7.0.3:
+    resolution: {integrity: sha512-+/HKd6EgcQCJGh2PSjZuUitQBQynKor4wrFbRg4DtAgS1aWO+gU52xpH7M9ScGgXSYmAVS9bIJ8EzuaGw0oNAw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cross-env/-/cross-env-7.0.3.tgz}
+    name: cross-env
+    version: 7.0.3
+    engines: {node: '>=10.14', npm: '>=6', yarn: '>=1'}
+    hasBin: true
+    dependencies:
+      cross-spawn: registry.npmmirror.com/cross-spawn/7.0.3
+    dev: true
+
   registry.npmmirror.com/cross-spawn/7.0.3:
     resolution: {integrity: sha512-iRDPJKUPVEND7dHPO8rkbOnPpyDygcDFtWjpeWNCgy8WP2rXcxXL8TskReQl6OrB2G7+UJrags1q15Fudc7G6w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/cross-spawn/-/cross-spawn-7.0.3.tgz}
     name: cross-spawn
@@ -3706,6 +3732,12 @@ packages:
     name: dedent
     version: 0.7.0
     dev: true
+
+  registry.npmmirror.com/deep-diff/0.3.8:
+    resolution: {integrity: sha512-yVn6RZmHiGnxRKR9sJb3iVV2XTF1Ghh2DiWRZ3dMnGc43yUdWWF/kX6lQyk3+P84iprfWKU/8zFTrlkvtFm1ug==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/deep-diff/-/deep-diff-0.3.8.tgz}
+    name: deep-diff
+    version: 0.3.8
+    dev: false
 
   registry.npmmirror.com/deep-is/0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/deep-is/-/deep-is-0.1.4.tgz}
@@ -4115,7 +4147,7 @@ packages:
       eslint: registry.npmmirror.com/eslint/8.24.0
     dev: true
 
-  registry.npmmirror.com/eslint-plugin-prettier/4.2.1_awmkh7s2gfwufkvh6fnk6cae3q:
+  registry.npmmirror.com/eslint-plugin-prettier/4.2.1_cfn5x6ujhhgzv3423d6k7r2zzm:
     resolution: {integrity: sha512-f/0rXLXUt0oFYs8ra4w49wYZBG5GKZpAYsJSm6rnYL5uVDjd+zowwMwVZHnAjf4edNrKpCDYfXDgmRE/Ak7QyQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eslint-plugin-prettier/-/eslint-plugin-prettier-4.2.1.tgz}
     id: registry.npmmirror.com/eslint-plugin-prettier/4.2.1
     name: eslint-plugin-prettier
@@ -4131,6 +4163,7 @@ packages:
     dependencies:
       eslint: registry.npmmirror.com/eslint/8.24.0
       eslint-config-prettier: registry.npmmirror.com/eslint-config-prettier/8.5.0_eslint@8.24.0
+      prettier: registry.npmmirror.com/prettier/2.7.1
       prettier-linter-helpers: registry.npmmirror.com/prettier-linter-helpers/1.0.0
     dev: true
 
@@ -6707,6 +6740,14 @@ packages:
       fast-diff: registry.npmmirror.com/fast-diff/1.2.0
     dev: true
 
+  registry.npmmirror.com/prettier/2.7.1:
+    resolution: {integrity: sha512-ujppO+MkdPqoVINuDFDRLClm7D78qbDt0/NR+wp5FqEZOoTNAjPHWj17QRhu7geIHJfcNhRk1XVQmF8Bp3ye+g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/prettier/-/prettier-2.7.1.tgz}
+    name: prettier
+    version: 2.7.1
+    engines: {node: '>=10.13.0'}
+    hasBin: true
+    dev: true
+
   registry.npmmirror.com/pretty-error/4.0.0:
     resolution: {integrity: sha512-AoJ5YMAcXKYxKhuJGdcvse+Voc6v1RgnsR3nWcYU7q4t6z0Q6T86sv5Zq8VIRbOWWFpvdGE83LtdSMNd+6Y0xw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/pretty-error/-/pretty-error-4.0.0.tgz}
     name: pretty-error
@@ -6953,6 +6994,14 @@ packages:
       resolve: registry.npmmirror.com/resolve/1.22.1
     dev: true
 
+  registry.npmmirror.com/redux-logger/3.0.6:
+    resolution: {integrity: sha512-JoCIok7bg/XpqA1JqCqXFypuqBbQzGQySrhFzewB7ThcnysTO30l4VCst86AuB9T9tuT03MAA56Jw2PNhRSNCg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/redux-logger/-/redux-logger-3.0.6.tgz}
+    name: redux-logger
+    version: 3.0.6
+    dependencies:
+      deep-diff: registry.npmmirror.com/deep-diff/0.3.8
+    dev: false
+
   registry.npmmirror.com/redux-thunk/2.4.1:
     resolution: {integrity: sha512-OOYGNY5Jy2TWvTL1KgAlVy6dcx3siPJ1wTq741EPyUKfn6W6nChdICjZwCd0p8AZBs5kWpZlbkXW2nE/zjUa+Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/redux-thunk/-/redux-thunk-2.4.1.tgz}
     name: redux-thunk
@@ -6978,7 +7027,6 @@ packages:
     version: 4.2.0
     dependencies:
       '@babel/runtime': registry.npmmirror.com/@babel/runtime/7.19.0
-    dev: false
 
   registry.npmmirror.com/regenerate-unicode-properties/10.1.0:
     resolution: {integrity: sha512-d1VudCLoIGitcU/hEg2QqvyGZQmdC0Lf8BqdOMXGFSvJP4bNV1+XqbPQeHHLD51Jh4QJJ225dlIFvY4Ly6MXmQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/regenerate-unicode-properties/-/regenerate-unicode-properties-10.1.0.tgz}
