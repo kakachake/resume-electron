@@ -5,7 +5,8 @@
   "description": "简历平台桌面应用",
   "main": "./app/main/electron.js",
   "scripts": {
-    "start": "concurrently  'npm:start:main' 'npm:start:render'",
+    "start": "concurrently  'npm:start:render' 'npm:start:main-watch' ",
+    "start:main-watch": "nodemon  --exec npm run start:main",
     "start:main": "webpack --config ./config/webpack.main.dev.js && electron ./dist/electron.js",
     "start:render": "webpack serve --config ./config/webpack.render.dev.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -56,6 +57,7 @@
     "husky": "^8.0.0",
     "less": "^4.1.3",
     "less-loader": "^11.0.0",
+    "nodemon": "^2.0.20",
     "postcss": "^8.4.17",
     "postcss-loader": "^7.0.1",
     "prettier": "^2.7.1",
