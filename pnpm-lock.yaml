@@ -14,6 +14,7 @@ specifiers:
   '@typescript-eslint/parser': ^5.38.1
   autoprefixer: ^10.4.12
   babel-loader: ^8.2.5
+  classnames: ^2.3.2
   clean-webpack-plugin: ^4.0.0
   commitizen: ^4.2.5
   concurrently: ^7.4.0
@@ -53,6 +54,7 @@ specifiers:
 
 dependencies:
   '@reduxjs/toolkit': registry.npmmirror.com/@reduxjs/toolkit/1.8.5_kuo2ie247izvzll3jejufdtq3q
+  classnames: registry.npmmirror.com/classnames/2.3.2
   core-js: registry.npmmirror.com/core-js/3.25.4
   electron: registry.npmmirror.com/electron/21.0.1
   react: registry.npmmirror.com/react/18.2.0
@@ -3191,6 +3193,12 @@ packages:
     version: 1.0.3
     engines: {node: '>=6.0'}
     dev: true
+
+  registry.npmmirror.com/classnames/2.3.2:
+    resolution: {integrity: sha512-CSbhY4cFEJRe6/GQzIk5qXZ4Jeg5pcsP7b5peFSDpffpe1cqjASH/n9UTjBwOp6XpMSTwQ8Za2K5V02ueA7Tmw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/classnames/-/classnames-2.3.2.tgz}
+    name: classnames
+    version: 2.3.2
+    dev: false
 
   registry.npmmirror.com/clean-css/5.3.1:
     resolution: {integrity: sha512-lCr8OHhiWCTw4v8POJovCoh4T7I9U11yVsPjMWWnnMmp9ZowCxyad1Pathle/9HjaDp+fdQKjO9fQydE6RHTZg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/clean-css/-/clean-css-5.3.1.tgz}

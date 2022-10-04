@@ -1,0 +1,61 @@
+.re-button {
+  box-shadow: none;
+  font-size: 14px;
+  line-height: 20px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+  cursor: pointer;
+  user-select: none;
+  border: 0 solid transparent;
+  border-radius: 5px;
+  padding: 6px 12px;
+  font-weight: 600;
+  outline: none;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+.re-button-disabled {
+  cursor: not-allowed;
+}
+
+.re-button-light {
+  background-color: var(--re-color-fill-0);
+  border: 0 solid transparent;
+  &:hover {
+    background-color: var(--re-color-fill-1);
+  }
+  &:active {
+    background-color: var(--re-color-fill-2);
+  }
+}
+
+.re-button-small {
+  height: 24px;
+  padding: 2px 12px;
+}
+.re-button-middle {
+  padding: 6px 12px;
+}
+.re-button-large {
+  height: 40px;
+  padding: 10px 16px;
+}
+
+.re-button-border {
+  border: 1px solid rgba(0, 0, 0, 0.07);
+}
+.re-button-primary {
+  color: var(--re-color-primary);
+}
+.re-button-default {
+  color: var(--re-color-text-1);
+}
+.re-button-warning {
+  color: var(--re-color-warning);
+}
+.re-button-danger {
+  color: var(--re-color-danger);
+}
