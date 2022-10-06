@@ -166,7 +166,7 @@ const ComT: FC = () => {
       </div>
       <div style={{ borderBottom: '1px solid var(--primary-color)' }}>
         <h1>Upload</h1>
-        <ReUpload />
+        <ReUpload multiple />
       </div>
     </div>
   );

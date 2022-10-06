@@ -35,7 +35,7 @@ export interface IReUploadProps {
   children?: React.ReactNode;
 }
 
-const ReUpload: FC = (props: IReUploadProps) => {
+const ReUpload: FC<IReUploadProps> = (props) => {
   const { style, accept, multiple, visible = true, onClick, onChange, children } = props;
   const inputSelectorRef = useRef<HTMLInputElement>(null);
 

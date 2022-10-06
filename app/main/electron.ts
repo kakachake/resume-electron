@@ -17,7 +17,7 @@ function createWindow() {
     },
   });
   if (isDev()) {
-    mainWindow.loadURL(`http://127.0.0.1:7001/#/comT`);
+    mainWindow.loadURL(`http://127.0.0.1:7001/#/`);
   } else {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
   }
