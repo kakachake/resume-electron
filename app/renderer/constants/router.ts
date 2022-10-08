@@ -1,3 +1,9 @@
+// 模块路径
+export const ROUTER = {
+  root: '/',
+  resume: '/resume',
+};
+
 export const ROUTER_ENTRY: TSRouter.Item[] = [
   {
     text: '介绍',

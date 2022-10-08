@@ -1,5 +1,6 @@
 import { FC } from 'react';
 import './ReScrollBox.module.less';
+import cName from 'classnames';
 
 export interface IScrollBoxProps {
   /**
@@ -22,6 +23,10 @@ export interface IScrollBoxProps {
    * @description 回调得到滚动的top
    */
   onScrollTop?: (top: number) => void;
+  /**
+   * @description className
+   */
+  className?: string;
 }
 
 const ReScrollBox: FC<IScrollBoxProps> = ({
@@ -30,6 +35,7 @@ const ReScrollBox: FC<IScrollBoxProps> = ({
   style = {},
   innerStyle = {},
   onScrollTop,
+  className,
 }) => {
   function onScroll(e: any) {
     const _event = e.target || e.currentTarget;
@@ -42,8 +48,12 @@ const ReScrollBox: FC<IScrollBoxProps> = ({
     _style = { ..._style, maxHeight: `${maxHeight}px` };
   }
   return (
-    <div className="scroll-box-outer" style={_style} onScroll={onScroll}>
-      <div className="scroll-box-hidden" style={{ maxHeight: `${maxHeight}px` }}>
+    <div className={cName('scroll-box-outer', className)}>
+      <div
+        className={cName('scroll-box-hidden')}
+        onScroll={onScroll}
+        style={{ maxHeight: `${maxHeight}px`, ..._style }}
+      >
         <div className="scroll-box-inter" style={innerStyle}>
           {children}
         </div>

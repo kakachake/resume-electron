@@ -1,0 +1,28 @@
+.slider {
+  box-sizing: border-box;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+  background-color: var(--primary-second-background-color);
+  .title {
+    position: sticky;
+    top: 0;
+    background-color: var(--primary-second-background-color);
+    padding-left: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 2.5rem;
+    display: flex;
+    align-items: center;
+    color: var(--primary-color);
+    box-shadow: 0 0 0 1px var(--primary-second-background-color);
+    z-index: 1;
+    &::before {
+      content: '';
+      position: absolute;
+      width: 3px;
+      left: 0px;
+      height: 50%;
+      background-color: var(--primary-color);
+    }
+  }
+}

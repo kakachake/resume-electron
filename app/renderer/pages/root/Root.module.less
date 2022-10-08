@@ -27,6 +27,7 @@
   .tips {
     font-size: 1rem;
     line-height: 3rem;
+    color: var(--primary-color);
   }
   .action {
     display: flex;
@@ -73,6 +74,14 @@
     font-weight: bold;
     &:hover {
       text-decoration: underline;
+    }
+  }
+}
+
+:global {
+  body[theme-mode='light'] {
+    .logo {
+      filter: invert(1);
     }
   }
 }

@@ -61,7 +61,7 @@ export interface Contact {
 /**
  * @description 求职信息
  */
-export interface Work {
+export interface Job {
   /**
    * @description 意愿岗位
    */
@@ -151,6 +151,7 @@ export interface SchoolExperience extends Experience {
  */
 export interface IntactResume {
   base: Base;
+  job: Job;
   skill: string;
   skillList: string[];
   hobby: string;
@@ -159,7 +160,6 @@ export interface IntactResume {
   certificate: string;
   certificateList: string[];
   contact: Contact;
-  work: Work;
   workExperience?: WorkExperience[];
   schoolExperience?: SchoolExperience[];
   projectExperience?: ProjectExperience[];
@@ -200,5 +200,5 @@ export interface SliderItem {
   /**
    * @description 是否必须
    */
-  require: boolean;
+  require?: boolean;
 }

@@ -1,7 +1,10 @@
 import { FC } from 'react';
-import { getAppPath } from '../../utils/appPath';
-import fileAction from '../../utils/file';
+// import { getAppPath } from '../../utils/appPath';
+// import fileAction from '../../utils/file';
 import ResumeContent from './ResumeContent/ResumeContent';
+import ResumeAction from './ResumeAction/ResumeAction';
+import ResumeToolbar from './ResumeToolbar/ResumeToolbar';
+import styles from './Resume.module.less';
 
 const Resume: FC = () => {
   // getAppPath().then((rootPath) => {
@@ -10,8 +13,16 @@ const Resume: FC = () => {
   //   });
   // });
   return (
-    <div>
-      <ResumeContent />
+    <div className={styles.container}>
+      <div className={styles.header}>
+        <ResumeAction />
+      </div>
+      <div className={styles.content}>
+        <ResumeContent />
+      </div>
+      <div className={styles.toolbar}>
+        <ResumeToolbar />
+      </div>
     </div>
   );
 };

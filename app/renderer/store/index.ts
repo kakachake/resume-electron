@@ -2,11 +2,13 @@ import { configureStore } from '@reduxjs/toolkit';
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import logger from 'redux-logger';
 import global from './slice/global';
+import resume from './slice/resume';
 import thunk from 'redux-thunk';
 
 export const store = configureStore({
   reducer: {
     global,
+    resume,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger, thunk),
   devTools: process.env.NODE_ENV !== 'production',

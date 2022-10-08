@@ -12,7 +12,10 @@ export const fetchComponent = async (
     .catch((err) => {
       throw new Error('Network response was not ok');
     });
+  console.log(text);
+
   const module = getParsedModule(text);
+  console.log(module.exports);
 
   return {
     default: module.exports,
@@ -34,6 +37,6 @@ const getParsedModule = (
   const require = (name: string) => {
     return (packages as any)[name];
   };
-  Function('require, exports, module', code)(require, module.exports, module);
+  Function('require,  module', code)(require, module);
   return module;
 };

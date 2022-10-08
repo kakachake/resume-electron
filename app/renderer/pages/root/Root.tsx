@@ -22,13 +22,17 @@ const Root: FC = () => {
   return (
     <div className={style.root}>
       <div className={style.container}>
-        <img src={logo} alt="" />
+        <img className="logo" src={logo} alt="" />
         <div className={style.title}>{appName}</div>
         <div className={style.tips}>一个模板简历制作平台, 让你的简历更加出众 ~</div>
         <div className={style.action}>
           {ROUTER_ENTRY.map((menu, idx) => {
             return (
-              <div key={menu.link} onClick={() => onRouterToLink(menu)} className={style.item}>
+              <div
+                key={menu.link}
+                onClick={() => onRouterToLink(menu)}
+                className={style.item}
+              >
                 {menu.text}
               </div>
             );
