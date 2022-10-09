@@ -6,6 +6,7 @@ import cancel from '@assets/icon/cancel.png';
 import ReButton from '../../ReButton/ReButton';
 import ReactDOM, { createPortal, unmountComponentAtNode } from 'react-dom';
 import { createRoot, Root } from 'react-dom/client';
+import React from 'react';
 const ReDialog: FC<IDialogModal> & {
   confirm: (config: IDialogModal) => void;
 } = ({
@@ -26,10 +27,15 @@ const ReDialog: FC<IDialogModal> & {
       onClose && onClose();
     }
   }, [visible]);
-  const {
-    cancelBtn = { show: true } as BtnConfig,
-    submitBtn = { show: true } as BtnConfig,
-  } = config;
+  const cancelBtn = config.cancelBtn
+    ? { show: true, ...config.cancelBtn }
+    : ({ show: false } as BtnConfig);
+  const submitBtn = config.submitBtn
+    ? { show: true, ...config.submitBtn }
+    : ({ show: false } as BtnConfig);
+  const deleteBtn = config.deleteBtn
+    ? { show: true, ...config.deleteBtn }
+    : ({ show: false } as BtnConfig);
   const renderDialog = () => (
     <div className={styles['re-portal']}>
       <div className={styles['re-modal-mask']}></div>
@@ -45,10 +51,11 @@ const ReDialog: FC<IDialogModal> & {
               <h5 className={styles['re-modal-header-title']}>{title}</h5>
               <div
                 onClick={() => {
-                  cancelBtn?.callback &&
-                    Promise.resolve(cancelBtn.callback()).then(() => {
-                      onClose && onClose();
-                    });
+                  cancelBtn?.callback
+                    ? Promise.resolve(cancelBtn.callback()).then(() => {
+                        onClose && onClose();
+                      })
+                    : onClose && onClose();
                 }}
                 className={styles['re-modal-close-icon']}
               >
@@ -119,8 +126,11 @@ ReDialog.confirm = (config: IDialogModal) => {
       />
     );
   }
-
-  render({ ...config, visible: true });
+  let { children, ...rest } = config;
+  children = React.cloneElement(children as React.ReactElement, {
+    destroy,
+  });
+  render({ children, ...rest, visible: true });
   return {
     destroy,
   };

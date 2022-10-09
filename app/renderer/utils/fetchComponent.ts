@@ -12,7 +12,7 @@ export const fetchComponent = async (
     .catch((err) => {
       throw new Error('Network response was not ok');
     });
-  console.log(text);
+  // console.log(text);
 
   const module = getParsedModule(text);
   console.log(module.exports);

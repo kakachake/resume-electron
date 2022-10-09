@@ -1,9 +1,14 @@
 import DynamicComponent from '@root/app/renderer/common/DynamicComponent';
+import messager, {
+  MESSAGE_EVENT_NAME_MAPS,
+} from '@root/app/renderer/common/messager/messager';
+import ReDialog from '@root/app/renderer/components/ReModal/ReDialog/ReDialog';
 import ReScrollBox from '@root/app/renderer/components/ReScrollBox/ReScrollBox';
 import useToolBarList from '@root/app/renderer/hooks/useToolBarList';
 import { useAppSelector } from '@root/app/renderer/store';
 import { FC, useEffect, useState } from 'react';
 import styles from './ResumeContent.module.less';
+import ResumeModals from '../ResumeModals';
 
 const ResumeContent: FC = () => {
   const [height, setHeight] = useState(document.documentElement.clientHeight);
@@ -18,6 +23,11 @@ const ResumeContent: FC = () => {
     };
   }, []);
   const { resume } = useAppSelector((state) => state.resume);
+  const onReceive = (data: { form_name: string }) => {
+    console.log('发布订阅，传参值为: ', data);
+    (ResumeModals as any)[data.form_name].showModal();
+  };
+  messager.useOn(MESSAGE_EVENT_NAME_MAPS.OPEN_FORM_MODAL, onReceive);
   return (
     <ReScrollBox
       className={styles['resume-content']}

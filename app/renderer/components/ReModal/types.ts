@@ -66,7 +66,7 @@ interface IModal {
   /**
    * @description 子组件
    */
-  children?: React.ReactNode;
+  children?: React.ReactElement;
   onClose?: () => void;
 }
 

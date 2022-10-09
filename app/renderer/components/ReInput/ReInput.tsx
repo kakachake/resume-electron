@@ -102,6 +102,8 @@ const ReInput: FC<ReInputProps> = ({
   onChange,
   ...args
 }) => {
+  console.log('ReInput', type);
+
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState<string>(value as string);
 
@@ -111,8 +113,6 @@ const ReInput: FC<ReInputProps> = ({
 
   const onInput = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value } = e.target as HTMLInputElement;
-    console.log(e.target);
-    console.log(value);
 
     if (maxLength && value.length > maxLength) {
       onChange?.({ target: { value: value.slice(0, maxLength) } } as any);
@@ -150,7 +150,7 @@ const ReInput: FC<ReInputProps> = ({
           disabled={disabled}
           placeholder={placeholder}
           autoFocus={autoFocus}
-          type="text"
+          type={type}
           {...args}
           value={inputValue}
           onChange={onInput}

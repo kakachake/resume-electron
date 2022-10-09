@@ -42,7 +42,6 @@ const ReScrollBox: FC<IScrollBoxProps> = ({
     onScrollTop && onScrollTop(_event.scrollTop);
   }
   let _style = { ...style };
-  console.log('maxHeight', maxHeight);
 
   if (maxHeight) {
     _style = { ..._style, maxHeight: `${maxHeight}px` };

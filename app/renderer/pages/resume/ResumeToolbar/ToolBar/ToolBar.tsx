@@ -2,10 +2,12 @@ import { SliderItem } from '@src/common/types/resume';
 import { FC } from 'react';
 import styles from './ToolBar.module.less';
 import cName from 'classnames';
+import { stopClick } from '@root/app/renderer/utils/stopClick';
 
 interface IToolBarProps {
   list: SliderItem[];
   edit?: boolean;
+  onItemClick?: (item: SliderItem) => void;
   onAddClick?: (item: SliderItem) => void;
   onEditClick?: (item: SliderItem) => void;
   onRemoveClick?: (item: SliderItem) => void;
@@ -14,6 +16,7 @@ interface IToolBarProps {
 const ToolBar: FC<IToolBarProps> = ({
   list,
   edit = false,
+  onItemClick,
   onAddClick,
   onEditClick,
   onRemoveClick,
@@ -22,7 +25,11 @@ const ToolBar: FC<IToolBarProps> = ({
     <div>
       {list.map((item) => {
         return (
-          <div className={styles.box} key={item.key}>
+          <div
+            className={styles.box}
+            key={item.key}
+            onClick={() => onItemClick && onItemClick(item)}
+          >
             <i className={cName(styles.icon, 'iconfont icon-gongzuojingyan')}></i>
             <div className={cName(styles.text)}>
               <div className={styles.name}>{item.name}</div>
@@ -32,16 +39,12 @@ const ToolBar: FC<IToolBarProps> = ({
             {edit && (
               <div className={styles.action}>
                 <i
-                  onClick={() => {
-                    onEditClick && onEditClick(item);
-                  }}
+                  onClick={stopClick(() => onEditClick && onEditClick(item))}
                   className="iconfont icon-bianji_o"
                 ></i>
                 {!item.require && (
                   <i
-                    onClick={() => {
-                      onRemoveClick && onRemoveClick(item);
-                    }}
+                    onClick={stopClick(() => onRemoveClick && onRemoveClick(item))}
                     className="iconfont icon-shanchu"
                   ></i>
                 )}
@@ -50,9 +53,7 @@ const ToolBar: FC<IToolBarProps> = ({
             {!edit && (
               <div className={styles.action}>
                 <i
-                  onClick={() => {
-                    onAddClick && onAddClick(item);
-                  }}
+                  onClick={stopClick(() => onAddClick && onAddClick(item))}
                   className="iconfont icon-tianjia"
                 ></i>
               </div>
