@@ -15,7 +15,7 @@ declare namespace TSUpload {
     /**
      * @description 文件本地预览
      */
-    base64URL: string;
+    base64URL?: string;
     /**
      * @description 释放本地预览URL
      */

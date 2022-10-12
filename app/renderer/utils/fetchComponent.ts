@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { ComponentType } from 'react';
+import * as ReactRedux from 'react-redux';
 
 export const fetchComponent = async (
   componentSrc: string
@@ -24,6 +25,7 @@ export const fetchComponent = async (
 
 const packages = {
   react: React,
+  ['react-redux']: ReactRedux,
 };
 
 const getParsedModule = (

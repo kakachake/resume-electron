@@ -7,10 +7,11 @@ import React, {
   useEffect,
   useState,
 } from 'react';
-import FormContext from './FormContext';
-import { ModelType } from './FormStore';
-import Label from './Label/Label';
-import Message from './Message/Message';
+import FormContext from '../FormContext';
+import { ModelType } from '../FormStore';
+import Label from '../Label/Label';
+import Message from '../Message/Message';
+import styles from './FormItem.module.less';
 
 interface IFormItem {
   name: string;
@@ -39,7 +40,7 @@ const FormItem: FC<IFormItem> = ({
   const { registerValidateFields, unRegisterValidate, dispatch } = formInstance;
   const [, forceUpdate] = useState({});
   const field = dispatch('getFieldModel', name) as ModelType;
-
+  console.log('renderFormItem', name);
   const onStoreChange = {
     changeValue() {
       forceUpdate({});
@@ -81,14 +82,16 @@ const FormItem: FC<IFormItem> = ({
     renderChildren = cloneElement(children, getControlled(children));
   }
   return (
-    <Label label={label} labelWidth={labelWidth} required={required} height={height}>
-      <div>
-        {renderChildren}
-        {field?.status === 'error' && (
-          <Message message={field?.message || '本项不能为空！'} />
-        )}
-      </div>
-    </Label>
+    <div className={styles.formItem}>
+      <Label label={label} labelWidth={labelWidth} required={required} height={height}>
+        <div>
+          {renderChildren}
+          {field?.status === 'error' && (
+            <Message message={field?.message || '本项不能为空！'} />
+          )}
+        </div>
+      </Label>
+    </div>
   );
 };
 

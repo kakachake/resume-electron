@@ -14,6 +14,12 @@ class FileEvent {
     /**
      * @description 本地预览地址
      */
+    // var fileReader = new FileReader();
+    // fileReader.onloadend = (e: any) => {
+    //   var result = e.target.result;
+    //   this.base64URL = result;
+    // };
+    // fileReader.readAsDataURL(file);
     this.base64URL = window.URL.createObjectURL(file);
   }
 

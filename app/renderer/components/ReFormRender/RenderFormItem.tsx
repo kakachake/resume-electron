@@ -14,7 +14,7 @@ const RenderFormItem: FC<IRenderFormItem> = ({ property, name }) => {
 
   return (
     <ReForm.FormItem name={name} label={title!} required={required} rules={rule}>
-      <RenderUi placeholder={placeholder} type={type} />
+      <RenderUi width={'100%'} placeholder={placeholder} type={type} />
     </ReForm.FormItem>
   );
 };

@@ -15,7 +15,12 @@ export default () => {
       RESUME_TOOLBAR_LIST.forEach((s: SliderItem) => {
         if (s.require) {
           _addToolbarList.push(s);
-          dispatch(addResume(s.key as keyof IntactResume));
+          // 初始化简历数据
+          dispatch(
+            addResume({
+              key: s.key as keyof IntactResume,
+            })
+          );
         }
         if (!s.require) _unAddToolbarList.push(s);
       });
@@ -30,7 +35,12 @@ export default () => {
     _unAddToolbarList = _unAddToolbarList.filter((s) => s.key !== toolbarItem.key);
     const _toolbarList = { isAdd: _addToolbarList, isNotAdd: _unAddToolbarList };
     dispatch(setToolBarList(_toolbarList));
-    dispatch(addResume(toolbarItem.key as keyof IntactResume));
+    dispatch(
+      // 初始化简历数据
+      addResume({
+        key: toolbarItem.key as keyof IntactResume,
+      })
+    );
     return _toolbarList;
   };
 

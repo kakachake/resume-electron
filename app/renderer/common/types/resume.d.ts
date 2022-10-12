@@ -34,6 +34,14 @@ export interface Base {
    * @description 政治面貌
    */
   political?: string;
+  /**
+   * @description 出生日期
+   */
+  date?: string;
+  /**
+   * @description 年龄
+   */
+  age?: number;
 }
 
 /**
@@ -152,12 +160,12 @@ export interface SchoolExperience extends Experience {
 export interface IntactResume {
   base: Base;
   job: Job;
-  skill: string;
+  skill: string[];
   skillList: string[];
   hobby: string;
-  evaluation: string;
+  evaluation: string[];
   evaluationList: string[];
-  certificate: string;
+  certificate: string[];
   certificateList: string[];
   contact: Contact;
   workExperience?: WorkExperience[];

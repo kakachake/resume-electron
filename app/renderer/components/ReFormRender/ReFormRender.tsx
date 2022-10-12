@@ -2,25 +2,31 @@ import { Schema } from 'json-schema';
 import { FC, forwardRef, useRef } from 'react';
 import { IFormRef } from '../ReForm/Form';
 import ReForm from '../ReForm/ReForm';
-import RenderFormItem from './RenderFormItem';
+
+import { RenderProperties } from './RenderProperties';
 
 export interface IReFormRenderProps {
   schema: Schema;
+  className?: string;
+  initialValues?: any;
+  name?: string;
 }
 
-const ReFormRender = ({ schema }: IReFormRenderProps, formRef: React.Ref<IFormRef>) => {
+const ReFormRender = (
+  { schema, className, initialValues, name }: IReFormRenderProps,
+  formRef: React.Ref<IFormRef>
+) => {
+  console.log(schema);
+
   const { properties } = schema;
   return properties ? (
-    <ReForm.Form ref={formRef}>
-      {Object.keys(properties).map((key) => {
-        return (
-          <RenderFormItem
-            key={key}
-            name={key}
-            property={properties[key]}
-          ></RenderFormItem>
-        );
-      })}
+    <ReForm.Form
+      name={name}
+      ref={formRef}
+      className={className}
+      initialValues={initialValues}
+    >
+      <RenderProperties properties={properties} />
     </ReForm.Form>
   ) : (
     <>"schema's properties is undefined"</>

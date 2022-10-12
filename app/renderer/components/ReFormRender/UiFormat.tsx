@@ -39,7 +39,7 @@ export const UiFormat: {
       onChange(dateString?.toString() || '');
     };
 
-    return <DatePicker defaultValue={defaultValue} type={_type} onChange={_onChange} />;
+    return <DatePicker value={defaultValue} type={_type} onChange={_onChange} />;
   },
   input: ReInput,
   image: function Image({
@@ -50,8 +50,11 @@ export const UiFormat: {
     value: string;
   }) {
     const [url, setUrl] = useState(value);
+    console.log(value);
 
     function _onChange(fileList: TSUpload.File[]) {
+      console.log(fileList[0]?.base64URL);
+
       onChange && onChange(fileList[0]?.base64URL);
     }
     const style = {

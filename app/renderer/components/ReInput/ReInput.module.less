@@ -56,6 +56,13 @@
   color: var(--re-color-text-0);
   transition: all 0.3s;
   font-size: 0;
+  &:hover {
+    .re-input-clear {
+      background-color: var(--primary-color);
+      border-radius: 50%;
+      display: block;
+    }
+  }
   .re-input {
     border: none;
     outline: none;
@@ -79,17 +86,18 @@
 }
 
 .re-input-clear {
-  display: block;
+  display: none;
   position: absolute;
   right: 0;
-  width: 16px;
-  height: 16px;
-  padding: 10px;
+  width: 7px;
+  height: 7px;
+  padding: 7px;
   cursor: pointer;
   margin: 0 5px 0 0;
   background: url(../../../../assets/icon/cancel.png) center;
   background-size: cover;
   opacity: 0.8;
+
   &:hover {
     opacity: 1;
   }

@@ -1,4 +1,7 @@
 import { unstable_batchedUpdates } from 'react-dom';
+import { getRandomId } from '../../utils';
+
+export const CHILD = Symbol('child');
 
 /* 对外接口  */
 export const formInstanceApi = [
@@ -13,6 +16,8 @@ export const formInstanceApi = [
   'validateFields',
   'submit',
   'unRegisterValidate',
+  'registerValidateForms',
+  'unRegisterValidateForms',
 ] as const;
 
 export type IFormApi = Pick<FormStore, typeof formInstanceApi[number]>;
@@ -26,6 +31,8 @@ export type ModelType = {
   message?: string;
   required: boolean;
   status: STATUS;
+  type?: 'default' | 'form';
+  instance?: IFormApi;
 };
 
 export type STATUS = 'pending' | 'success' | 'error';
@@ -36,9 +43,13 @@ export class FormStore {
     [key: string]: ModelType;
   } = {};
   control: {
-    [key: string]: {
-      changeValue: Function;
-    };
+    [key: string]:
+      | {
+          changeValue: Function;
+        }
+      | {
+          changeValue: Function;
+        }[];
   } = {};
   isSchedule = false;
   penddingValidateQueue: ((...args: any) => void)[] = [];
@@ -48,11 +59,14 @@ export class FormStore {
   callback: {
     onFinishFailed?: Function;
     onFinish?: (...args: any) => void;
+    onChange?: (formValue: any) => void;
   } = {};
+  childForm: IFormApi[] = [];
   constructor(forceUpdate: Function, defaultFormValue = {}) {
     this.FormUpdate = forceUpdate;
     this.defaultFormValue = defaultFormValue;
   }
+
   getFormApi(): Pick<FormStore, typeof formInstanceApi[number]> {
     return (formInstanceApi as unknown as any[]).reduce(
       (
@@ -69,22 +83,26 @@ export class FormStore {
       [key in typeof formInstanceApi[number]]: any;
     };
   } /* 创建一个验证模块 */
+
   static createValidate(
     validate: Omit<ModelType, 'status' | 'value'> & Partial<Pick<ModelType, 'value'>>
   ): ModelType {
-    const { value = '', rule, required, message } = validate;
+    const { value = '', rule, required, message, instance, type = 'default' } = validate;
     return {
       value,
       rule: rule || (() => true),
       required: required || false,
       message: message || '',
       status: 'pending',
+      instance,
+      type,
     };
   }
 
   setCallback(callback: {
     onFinishFailed?: Function;
     onFinish?: (...args: any) => void;
+    onChange?: (formValue: any) => void;
   }) {
     this.callback = callback;
   }
@@ -92,6 +110,46 @@ export class FormStore {
   dispatch(action: keyof FormStore, ...args: any) {
     if (action) {
       return (this[action as keyof FormStore] as Function)(...args);
+    }
+  }
+
+  static createFormModel() {
+    return FormStore.createValidate({
+      value: [],
+      required: false,
+      rule: () => true,
+      type: 'form',
+    });
+  }
+
+  registerValidateForms(
+    name: string,
+    control: {
+      changeValue: Function;
+    },
+    model: Omit<ModelType, 'status' | 'value'> & Partial<Pick<ModelType, 'instance'>>
+  ) {
+    const validate = FormStore.createValidate(model);
+    const _control = this.control[name];
+    Array.isArray(_control) ? _control.push(control) : (this.control[name] = [control]);
+    this.model[name] = this.model[name] ?? FormStore.createFormModel();
+    const id = this.model[name].value.push(validate) - 1;
+    if (this.defaultFormValue[name]) {
+      const notify = this.notifyChange.bind(this, name);
+      this.penddingValidateQueue.push(notify);
+    }
+    this.scheduleValidate();
+    return id;
+  }
+
+  unRegisterValidateForms(name: string, id: number) {
+    const model = this.model[name];
+    if (model) {
+      model.value.splice(id, 1);
+    }
+    const control = this.control[name];
+    if (Array.isArray(control)) {
+      control.splice(id, 1);
     }
   }
 
@@ -106,6 +164,11 @@ export class FormStore {
     const validate = FormStore.createValidate(model);
     this.control[name] = control;
     this.model[name] = validate;
+    if (this.defaultFormValue[name]) {
+      const notify = this.notifyChange.bind(this, name);
+      this.penddingValidateQueue.push(notify);
+    }
+    this.scheduleValidate();
   }
 
   unRegisterValidate(name: string) {
@@ -115,8 +178,15 @@ export class FormStore {
 
   notifyChange(name: string) {
     const controller = this.control[name];
-    if (controller && controller.changeValue) {
+    if (controller && Array.isArray(controller)) {
+      controller.forEach((item) => {
+        item.changeValue();
+      });
+    } else if (controller && controller.changeValue) {
       controller.changeValue();
+    }
+    if (this.callback.onChange) {
+      this.callback.onChange(this.getFieldsValue());
     }
   }
 
@@ -128,7 +198,6 @@ export class FormStore {
 
   setFieldValue(name: string, modelValue: Omit<ModelType, 'status'> | string) {
     const model = this.model[name];
-
     if (!model) return false;
     if (typeof modelValue === 'string' || !modelValue) {
       this.setValueClearStatus(model, name, modelValue);
@@ -158,11 +227,19 @@ export class FormStore {
 
   getFieldsValue() {
     const formData: {
-      [key: string]: any;
+      [key: string | symbol]: any;
     } = {};
+    console.log(this.model);
     Object.keys(this.model).forEach((name) => {
-      formData[name] = this.getFieldValue(name);
+      if (this.model[name].type === 'form') {
+        formData[name] = this.model[name].value.map((item: ModelType) =>
+          item!.instance!.getFieldsValue()
+        );
+      } else {
+        formData[name] = this.getFieldValue(name);
+      }
     });
+
     return formData;
   }
 
@@ -218,16 +295,18 @@ export class FormStore {
     Object.keys(this.model).forEach((modelName: string) => {
       const modelStatus = this.validateFieldValue(modelName, true);
       if (modelStatus === 'error') {
-        message = this.model[modelName].message ?? '';
+        message = this.model[modelName].message || '请检查输入是否有误';
         error = true;
       }
     });
     callback(!!error, message);
   }
   submit(cb?: Function) {
-    this.validateFields((res) => {
+    console.log(this.model);
+
+    this.validateFields((res, msg) => {
       const { onFinish, onFinishFailed } = this.callback;
-      cb && cb(res, this.getFieldsValue());
+      cb && cb(res, this.getFieldsValue(), msg);
       if (!res)
         onFinishFailed &&
           typeof onFinishFailed === 'function' &&

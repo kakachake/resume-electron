@@ -14,6 +14,7 @@ declare module 'json-schema' {
     default?: any;
     multipleOf?: number;
     maximum?: number;
+    widget?: string;
     exclusiveMaximum?: boolean;
     minimum?: number;
     exclusiveMinimum?: boolean;

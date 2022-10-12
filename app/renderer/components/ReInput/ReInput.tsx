@@ -102,8 +102,6 @@ const ReInput: FC<ReInputProps> = ({
   onChange,
   ...args
 }) => {
-  console.log('ReInput', type);
-
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState<string>(value as string);
 
