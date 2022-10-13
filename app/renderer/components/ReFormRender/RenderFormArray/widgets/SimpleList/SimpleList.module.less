@@ -1,11 +1,28 @@
+.formContent {
+  display: block;
+}
+
 .formItem {
+  border-bottom: 1px solid var(--primary-color-light);
+  padding: 15px 0;
   display: flex;
   align-items: center;
   width: 100%;
+  position: relative;
+  &:last-child {
+    border: none;
+  }
   .mainForm {
     flex: 1;
   }
   .operation {
+    position: absolute;
+    right: 0;
+    top: 5px;
     flex: 0 0 auto;
   }
+}
+
+.formAdd {
+  margin-bottom: 10px;
 }

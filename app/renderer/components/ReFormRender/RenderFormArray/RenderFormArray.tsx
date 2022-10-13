@@ -12,16 +12,26 @@ interface IRenderFormArrayProps {
   schema: Schema;
   className?: string;
   name: string;
+  initialValues?: any;
 }
 
-export const RenderFormArray: FC<IRenderFormArrayProps> = ({ schema, name }) => {
+export const RenderFormArray: FC<IRenderFormArrayProps> = ({
+  schema,
+  name,
+  initialValues,
+}) => {
   console.log(name);
+  console.log(initialValues);
+
+  const _initialValues: any[] = Array.isArray(initialValues)
+    ? initialValues
+    : initialValues[name];
   const itemSchema = schema.items as WidgetSchema;
   const widget = itemSchema.widget || 'simpleList';
   const Widget = (widgets as any)[widget];
   return (
     <div>
-      <Widget schema={itemSchema} name={name} />
+      <Widget initialValues={_initialValues} schema={itemSchema} name={name} />
     </div>
   );
 };

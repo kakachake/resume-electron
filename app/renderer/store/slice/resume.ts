@@ -28,13 +28,51 @@ const initialState: ResumeState = {
       political: '党员',
       age: 22,
     },
-    certificate: ['全国英语四级证书', '全国计算机二级证书'],
+    certificate: [
+      {
+        name: '英语四级',
+        date: '2022-10-10',
+      },
+      {
+        name: '英语六级',
+        date: '2022-10-10',
+      },
+    ],
     contact: {
       phone: '15615538215',
       email: 'theeasylife@foxmail.com',
       github: 'https://github.com/kakachake',
       juejin: 'https://juejin.cn/user/1732486057168654',
     },
+    skill: [
+      {
+        desc: '熟悉 Vue.js，了解数据双向绑定原理、阅读过 NextTick 源码',
+      },
+      {
+        desc: '熟悉 React，了解并使用 Hooks 特性，阅读过 redux 源码',
+      },
+      {
+        desc: '熟悉 Node.js，了解 Express 框架、阅读过 Koa 源码',
+      },
+      {
+        desc: '熟悉 TypeScript，了解其类型系统、阅读过 Redux 源码',
+      },
+      {
+        desc: '阅读过 Antd 部分优秀组件源码，并参考借鉴，开发组内 UI 组件库',
+      },
+      {
+        desc: '熟悉 Webpack，了解其原理、阅读过 Webpack 源码',
+      },
+      {
+        desc: '熟悉 Git，了解其原理、阅读过 Git 源码',
+      },
+      {
+        desc: '熟悉 Linux，了解其原理、阅读过 Linux 源码',
+      },
+      {
+        desc: '熟悉 MySQL，了解其原理、阅读过 MySQL 源码',
+      },
+    ],
   },
   resumeToolbarKeys: [],
 };

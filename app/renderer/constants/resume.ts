@@ -21,11 +21,11 @@ export const RESUME_TOOLBAR_LIST: SliderItem[] = [
     summary: '更好介绍自己，机会会更多',
     require: true,
   },
-  {
-    key: RESUME_TOOLBAR_MAPS.education,
-    name: '教育信息',
-    summary: '介绍你的学校和专业信息',
-  },
+  // {
+  //   key: RESUME_TOOLBAR_MAPS.education,
+  //   name: '教育信息',
+  //   summary: '介绍你的学校和专业信息',
+  // },
   {
     key: RESUME_TOOLBAR_MAPS.job,
     name: '求职意向',

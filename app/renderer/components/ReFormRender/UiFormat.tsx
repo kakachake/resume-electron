@@ -1,7 +1,7 @@
 import { Avatar, DatePicker, Toast } from '@douyinfe/semi-ui';
 import { useState } from 'react';
 import { IconCamera } from '@douyinfe/semi-icons';
-import ReInput from '../ReInput/ReInput';
+import ReInput, { ReInputProps } from '../ReInput/ReInput';
 import { Schema } from 'json-schema';
 import ReUpload from '../ReUpload/ReUpload';
 
@@ -23,7 +23,7 @@ export const UiFormat: {
     | 'time'
     | 'upload']?: React.FC<any>;
 } = {
-  textarea: ReInput,
+  textarea: (props: any) => <ReInput {...props} controlType="textarea" />,
   dateTime: function DateTimeAdpter({
     type,
     onChange,

@@ -154,18 +154,33 @@ export interface SchoolExperience extends Experience {
   content?: string;
   parseContent?: string[];
 }
+
+/**
+ * @description 证书
+ */
+export interface Certificate {
+  /**
+   * @description 证书名称
+   */
+  name?: string;
+  /**
+   * @description 获得时间
+   */
+  date?: number | string | undefined;
+}
+
 /**
  * @description 一份完整的简历信息
  */
 export interface IntactResume {
   base: Base;
   job: Job;
-  skill: string[];
+  skill: { desc: string }[];
   skillList: string[];
   hobby: string;
   evaluation: string[];
   evaluationList: string[];
-  certificate: string[];
+  certificate: Certificate[];
   certificateList: string[];
   contact: Contact;
   workExperience?: WorkExperience[];

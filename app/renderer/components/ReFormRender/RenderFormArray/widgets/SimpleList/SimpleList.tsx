@@ -1,6 +1,7 @@
+import { IconDelete } from '@douyinfe/semi-icons';
 import { getRandomId } from '@root/app/renderer/utils';
 import { Schema } from 'json-schema';
-import React, { FC, memo, useState } from 'react';
+import React, { FC, memo, useEffect, useState } from 'react';
 import ReButton from '../../../../ReButton/ReButton';
 import { IFormRef } from '../../../../ReForm/Form';
 import ReFormRender from '../../../ReFormRender';
@@ -10,9 +11,10 @@ import styles from './SimpleList.module.less';
 interface ISimpleListProps {
   schema: Schema;
   name: string;
+  initialValues?: any[];
 }
 
-export const SimpleList: FC<ISimpleListProps> = ({ schema, name }) => {
+export const SimpleList: FC<ISimpleListProps> = ({ schema, name, initialValues }) => {
   const getReFormRender = (idx: number) => {
     const Item = memo(() => (
       <ReFormRender ref={(el) => addRef(idx, el)} schema={schema} name={name} />
@@ -20,9 +22,7 @@ export const SimpleList: FC<ISimpleListProps> = ({ schema, name }) => {
     (Item as any).key = getRandomId();
     return Item;
   };
-  const [forms, setForms] = useState<React.MemoExoticComponent<() => JSX.Element>[]>([
-    getReFormRender(0),
-  ]);
+  const [forms, setForms] = useState<React.MemoExoticComponent<() => JSX.Element>[]>([]);
   const [formList, setFormList] = useState<IFormRef[]>([]);
   const addRef = (idx: number, el: any) => {
     setFormList((formList) => {
@@ -31,7 +31,18 @@ export const SimpleList: FC<ISimpleListProps> = ({ schema, name }) => {
     });
   };
 
+  useEffect(() => {
+    const len = initialValues?.length || 0;
+    const newForms = [];
+    for (let i = 0; i < len; i++) {
+      newForms.push(getReFormRender(i));
+    }
+    setForms(newForms);
+  }, [initialValues]);
+
   const deleteForm = (idx: number) => {
+    const formRef = formList[idx];
+
     setForms((forms) => {
       const _form = forms.filter((_, i) => i !== idx);
 
@@ -46,7 +57,7 @@ export const SimpleList: FC<ISimpleListProps> = ({ schema, name }) => {
 
   return (
     <div>
-      <div>
+      <div className={styles.formContent}>
         {forms.map((Item, idx) => {
           return (
             <div key={(Item as any).key} className={styles.formItem}>
@@ -55,18 +66,20 @@ export const SimpleList: FC<ISimpleListProps> = ({ schema, name }) => {
               </div>
               <div className={styles.operation}>
                 <ReButton
+                  size="small"
+                  type="danger"
                   onClick={() => {
                     deleteForm(idx);
                   }}
                 >
-                  delete
+                  <IconDelete />
                 </ReButton>
               </div>
             </div>
           );
         })}
       </div>
-      <div>
+      <div className={styles.formAdd}>
         <ReButton
           onClick={() => {
             setForms((forms) => {
@@ -76,7 +89,7 @@ export const SimpleList: FC<ISimpleListProps> = ({ schema, name }) => {
             });
           }}
         >
-          add
+          新增
         </ReButton>
       </div>
     </div>

@@ -18,6 +18,8 @@ export const formInstanceApi = [
   'unRegisterValidate',
   'registerValidateForms',
   'unRegisterValidateForms',
+  'setDefaultValue',
+  'notifyChanges',
 ] as const;
 
 export type IFormApi = Pick<FormStore, typeof formInstanceApi[number]>;
@@ -65,6 +67,15 @@ export class FormStore {
   constructor(forceUpdate: Function, defaultFormValue = {}) {
     this.FormUpdate = forceUpdate;
     this.defaultFormValue = defaultFormValue;
+  }
+
+  setDefaultValue(defaultFormValue = {}) {
+    Object.keys(this.model).forEach((key) => {
+      const model = this.model[key];
+      model.value = (defaultFormValue as any)[key] ?? null;
+      const notify = this.notifyChange.bind(this, key);
+      this.penddingValidateQueue.push(notify);
+    });
   }
 
   getFormApi(): Pick<FormStore, typeof formInstanceApi[number]> {
@@ -129,11 +140,16 @@ export class FormStore {
     },
     model: Omit<ModelType, 'status' | 'value'> & Partial<Pick<ModelType, 'instance'>>
   ) {
+    this.model[name] = this.model[name] ?? FormStore.createFormModel();
+    const modelValue = this.model[name].value;
+    const modelValueLen = modelValue.length;
+    console.log(this.defaultFormValue[name]?.[modelValueLen]);
+
+    model.instance?.setDefaultValue(this.defaultFormValue[name]?.[modelValueLen] ?? {});
     const validate = FormStore.createValidate(model);
     const _control = this.control[name];
     Array.isArray(_control) ? _control.push(control) : (this.control[name] = [control]);
-    this.model[name] = this.model[name] ?? FormStore.createFormModel();
-    const id = this.model[name].value.push(validate) - 1;
+    const id = modelValue.push(validate) - 1;
     if (this.defaultFormValue[name]) {
       const notify = this.notifyChange.bind(this, name);
       this.penddingValidateQueue.push(notify);
@@ -142,15 +158,16 @@ export class FormStore {
     return id;
   }
 
-  unRegisterValidateForms(name: string, id: number) {
-    const model = this.model[name];
-    if (model) {
-      model.value.splice(id, 1);
-    }
-    const control = this.control[name];
-    if (Array.isArray(control)) {
-      control.splice(id, 1);
-    }
+  unRegisterValidateForms(name: string, instance: IFormApi, control: any) {
+    const models = this.model[name];
+    models.value = models.value.filter((model: ModelType) => {
+      return model.instance !== instance;
+    });
+    const controls = this.control[name] as any[];
+
+    this.control[name] = controls.filter((_control) => {
+      return _control != control;
+    });
   }
 
   registerValidateFields(
@@ -176,8 +193,19 @@ export class FormStore {
     delete this.control[name];
   }
 
+  notifyChanges() {
+    console.log('notifyChanges', this.model, this.control);
+
+    Object.keys(this.control).forEach((key) => {
+      const notify = this.notifyChange.bind(this, key);
+      this.penddingValidateQueue.push(notify);
+    });
+    this.scheduleValidate();
+  }
+
   notifyChange(name: string) {
     const controller = this.control[name];
+    console.log('notifyChange', name, controller, this.model[name]);
     if (controller && Array.isArray(controller)) {
       controller.forEach((item) => {
         item.changeValue();
@@ -233,7 +261,7 @@ export class FormStore {
     Object.keys(this.model).forEach((name) => {
       if (this.model[name].type === 'form') {
         formData[name] = this.model[name].value.map((item: ModelType) =>
-          item!.instance!.getFieldsValue()
+          item?.instance?.getFieldsValue()
         );
       } else {
         formData[name] = this.getFieldValue(name);
@@ -256,22 +284,30 @@ export class FormStore {
   validateFieldValue(name: string, forceUpdate = false) {
     const model = this.model[name];
     const lastStatus = model.status;
-    const { value, rule, required, message } = model;
+    const { value, rule, required, message, type } = model;
     let status: STATUS = 'pending';
-
-    if (required && !value) {
-      status = 'error';
-    } else if (rule && rule instanceof RegExp && !rule?.test(value)) {
-      status = 'error';
-    } else if (typeof rule === 'function') {
-      status = rule(value) ? 'success' : 'error';
+    if (type === 'form') {
+      status = 'success';
+      model.value.forEach((item: ModelType) => {
+        item?.instance?.validateFields((err: any) => {
+          if (err) status = 'error';
+        });
+      });
+    } else {
+      if (required && !value) {
+        status = 'error';
+      } else if (rule && rule instanceof RegExp && !rule?.test(value)) {
+        status = 'error';
+      } else if (typeof rule === 'function') {
+        status = rule(value) ? 'success' : 'error';
+      }
+      model.status = status;
+      if (forceUpdate || lastStatus !== status) {
+        const notify = this.notifyChange.bind(this, name);
+        this.penddingValidateQueue.push(notify);
+      }
+      this.scheduleValidate();
     }
-    model.status = status;
-    if (forceUpdate || lastStatus !== status) {
-      const notify = this.notifyChange.bind(this, name);
-      this.penddingValidateQueue.push(notify);
-    }
-    this.scheduleValidate();
     return status;
   }
 

@@ -7,21 +7,27 @@ export const useChildForm = (name: string, childInstance: IFormApi) => {
   console.log('useChildForm');
 
   const fatherInstance = useContext(FormContext);
-  const { registerValidateForms, unRegisterValidateForms, dispatch } = fatherInstance;
-  const [, forceUpdate] = useState({});
+  const { registerValidateForms, unRegisterValidateForms, dispatch, notifyChanges } =
+    fatherInstance;
+
   const onStoreChange = {
     changeValue() {
       // forceUpdate({});
+      console.log('changeValue');
+
+      // childInstance.notifyChanges();
     },
   };
   useEffect(() => {
-    const id = registerValidateForms(name, onStoreChange, {
+    const control = onStoreChange;
+    const model = {
       instance: childInstance,
       required: false,
-    });
+    };
+    registerValidateForms(name, onStoreChange, model);
 
     return () => {
-      unRegisterValidateForms(name, id);
+      unRegisterValidateForms(name, childInstance, control);
     };
   }, []);
 };

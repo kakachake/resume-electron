@@ -1,6 +1,6 @@
 import { Schema } from 'json-schema';
 
-export const certificateSchema: Schema = {
+export const skillSchema: Schema = {
   type: 'object',
   flex: false,
   properties: {
@@ -11,18 +11,12 @@ export const certificateSchema: Schema = {
       items: {
         type: 'object',
         properties: {
-          name: {
+          desc: {
             type: 'string',
-            title: '证书名称',
+            title: '技能名称',
             required: true,
             width: '100%',
-          },
-          date: {
-            type: 'string',
-            title: '获得时间',
-            required: true,
-            format: 'dateTime',
-            width: '100%',
+            format: 'textarea',
           },
         },
       },
@@ -30,6 +24,6 @@ export const certificateSchema: Schema = {
   },
 };
 
-export const certificateAdapter = (formValue: any) => {
+export const skillAdapter = (formValue: any) => {
   return formValue.list;
 };

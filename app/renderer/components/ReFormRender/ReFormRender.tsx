@@ -18,15 +18,18 @@ const ReFormRender = (
 ) => {
   console.log(schema);
 
-  const { properties } = schema;
+  const { properties, flex = true } = schema;
   return properties ? (
     <ReForm.Form
       name={name}
       ref={formRef}
       className={className}
       initialValues={initialValues}
+      style={{
+        display: flex ? 'flex' : 'block',
+      }}
     >
-      <RenderProperties properties={properties} />
+      <RenderProperties initialValues={initialValues} properties={properties} />
     </ReForm.Form>
   ) : (
     <>"schema's properties is undefined"</>

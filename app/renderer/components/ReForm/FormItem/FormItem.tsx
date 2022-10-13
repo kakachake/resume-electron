@@ -84,7 +84,7 @@ const FormItem: FC<IFormItem> = ({
   return (
     <div className={styles.formItem}>
       <Label label={label} labelWidth={labelWidth} required={required} height={height}>
-        <div>
+        <div className={styles.formItemContent}>
           {renderChildren}
           {field?.status === 'error' && (
             <Message message={field?.message || '本项不能为空！'} />

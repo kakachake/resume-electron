@@ -13,7 +13,7 @@ import { updateResume } from '@root/app/renderer/store/slice/resume';
 import { FC, useRef } from 'react';
 import ModelProvider from './ModelProvider';
 import styles from './Index.module.less';
-import { resumeSchema } from './schemas/schema';
+import { resumeAdapter, resumeSchema } from './schemas/schema';
 
 export interface IResumeModalProps {
   destroy?: () => void;
@@ -24,6 +24,7 @@ export const ResumeModals: FC<IResumeModalProps> & {
   showModal: ({ type }: { type: keyof IntactResume }) => void;
 } = ({ destroy, type }) => {
   const schema = (resumeSchema as any)[type];
+  const adapter = (resumeAdapter as any)[type + 'Adapter'] || ((data: any) => data);
   const { [type]: initialValues } = useAppSelector((state) => state.resume.resume);
   const dispatch = useAppDispatch();
   const formRef = useRef<IFormRef>(null);
@@ -34,14 +35,14 @@ export const ResumeModals: FC<IResumeModalProps> & {
       } else {
         console.log(formValue);
 
-        // dispatch(
-        //   updateResume({
-        //     key: type,
-        //     value: formValue,
-        //   })
-        // );
-        // destroy?.();
-        // Toast.success('修改成功');
+        dispatch(
+          updateResume({
+            key: type,
+            value: adapter(formValue),
+          })
+        );
+        destroy?.();
+        Toast.success('修改成功');
       }
     });
   };

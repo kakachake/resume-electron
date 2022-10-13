@@ -6,17 +6,34 @@ import RenderFormItem from './RenderFormItem';
 
 interface IRenderPropertiesProps {
   properties: Schema['properties'];
+  initialValues?: any;
 }
 
-export const RenderProperties: FC<IRenderPropertiesProps> = ({ properties }) => {
+export const RenderProperties: FC<IRenderPropertiesProps> = ({
+  properties,
+  initialValues,
+}) => {
   return properties ? (
     <>
       {Object.keys(properties).map((key) => {
         switch (properties[key].type) {
           case 'object':
-            return <RenderFormGroup key={key} schema={properties[key]} />;
+            return (
+              <RenderFormGroup
+                initialValues={initialValues}
+                key={key}
+                schema={properties[key]}
+              />
+            );
           case 'array':
-            return <RenderFormArray key={key} name={key} schema={properties[key]} />;
+            return (
+              <RenderFormArray
+                initialValues={initialValues}
+                key={key}
+                name={key}
+                schema={properties[key]}
+              />
+            );
           default:
             return <RenderFormItem key={key} name={key} property={properties[key]} />;
         }

@@ -104,6 +104,7 @@ const ReInput: FC<ReInputProps> = ({
 }) => {
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState<string>(value as string);
+  console.log(value);
 
   useLayoutEffect(() => {
     setInputValue(value as string);
@@ -111,6 +112,8 @@ const ReInput: FC<ReInputProps> = ({
 
   const onInput = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value } = e.target as HTMLInputElement;
+    console.log(value);
+    setInputValue(value);
 
     if (maxLength && value.length > maxLength) {
       onChange?.({ target: { value: value.slice(0, maxLength) } } as any);

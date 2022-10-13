@@ -7,6 +7,7 @@ import { ROUTER_ENTRY } from '../../constants/router';
 import { isHttpOrHttps } from '../../utils/router';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { setAppName } from '@src/store/slice/global';
+import ReInput from '../../components/ReInput/ReInput';
 const Root: FC = () => {
   const appName = useAppSelector((state) => state.global.appName);
 
@@ -23,6 +24,7 @@ const Root: FC = () => {
     <div className={style.root}>
       <div className={style.container}>
         <img className="logo" src={logo} alt="" />
+
         <div className={style.title}>{appName}</div>
         <div className={style.tips}>一个模板简历制作平台, 让你的简历更加出众 ~</div>
         <div className={style.action}>
