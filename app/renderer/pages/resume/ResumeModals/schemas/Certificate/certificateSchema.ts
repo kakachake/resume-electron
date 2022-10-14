@@ -29,7 +29,11 @@ export const certificateSchema: Schema = {
     },
   },
 };
-
-export const certificateAdapter = (formValue: any) => {
-  return formValue.list;
+export const certificateAdapter = {
+  form2data: (form: any) => {
+    return form.list;
+  },
+  data2form: (data: any) => {
+    return data;
+  },
 };

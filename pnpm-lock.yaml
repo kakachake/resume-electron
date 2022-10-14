@@ -18,6 +18,7 @@ specifiers:
   autoprefixer: ^10.4.12
   axios: ^1.0.0
   babel-loader: ^8.2.5
+  babel-plugin-transform-default-named-imports: ^1.2.2
   classnames: ^2.3.2
   clean-webpack-plugin: ^4.0.0
   commitizen: ^4.2.5
@@ -39,6 +40,7 @@ specifiers:
   jspdf: ^2.5.1
   less: ^4.1.3
   less-loader: ^11.0.0
+  markdown-to-jsx: ^7.1.7
   nodemon: ^2.0.20
   postcss: ^8.4.17
   postcss-loader: ^7.0.1
@@ -53,6 +55,7 @@ specifiers:
   style-loader: ^3.3.1
   typescript: ^4.8.4
   typescript-plugin-css-modules: ^3.4.0
+  unist-util-stringify-position: ^3.0.2
   webpack: ^5.74.0
   webpack-cli: ^4.10.0
   webpack-dev-server: ^4.11.1
@@ -67,6 +70,7 @@ dependencies:
   electron: registry.npmmirror.com/electron/21.0.1
   html2canvas: registry.npmmirror.com/html2canvas/1.4.1
   jspdf: registry.npmmirror.com/jspdf/2.5.1
+  markdown-to-jsx: registry.npmmirror.com/markdown-to-jsx/7.1.7_react@18.2.0
   react: registry.npmmirror.com/react/18.2.0
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
   react-redux: registry.npmmirror.com/react-redux/8.0.4_5uumaiclxbdbzaqafclbf6maf4
@@ -74,6 +78,7 @@ dependencies:
   redux-logger: registry.npmmirror.com/redux-logger/3.0.6
   redux-thunk: registry.npmmirror.com/redux-thunk/2.4.1
   regenerator-runtime: registry.npmmirror.com/regenerator-runtime/0.13.9
+  unist-util-stringify-position: registry.npmmirror.com/unist-util-stringify-position/3.0.2
 
 devDependencies:
   '@babel/core': registry.npmmirror.com/@babel/core/7.19.3
@@ -90,6 +95,7 @@ devDependencies:
   autoprefixer: registry.npmmirror.com/autoprefixer/10.4.12_postcss@8.4.17
   axios: registry.npmmirror.com/axios/1.0.0
   babel-loader: registry.npmmirror.com/babel-loader/8.2.5_wfdvla2jorjoj23kkavho2upde
+  babel-plugin-transform-default-named-imports: registry.npmmirror.com/babel-plugin-transform-default-named-imports/1.2.2
   clean-webpack-plugin: registry.npmmirror.com/clean-webpack-plugin/4.0.0_webpack@5.74.0
   commitizen: registry.npmmirror.com/commitizen/4.2.5
   concurrently: registry.npmmirror.com/concurrently/7.4.0
@@ -2386,6 +2392,12 @@ packages:
       '@types/node': registry.npmmirror.com/@types/node/18.8.0
     dev: true
 
+  registry.npmmirror.com/@types/unist/2.0.6:
+    resolution: {integrity: sha512-PBjIUxZHOuj0R15/xuwJYjFi+KZdNFrehocChv4g5hu6aFroHue8m0lBP0POdK2nKzbw0cgV1mws8+V/JAcEkQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/unist/-/unist-2.0.6.tgz}
+    name: '@types/unist'
+    version: 2.0.6
+    dev: false
+
   registry.npmmirror.com/@types/use-sync-external-store/0.0.3:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@types/use-sync-external-store/-/use-sync-external-store-0.0.3.tgz}
     name: '@types/use-sync-external-store'
@@ -3079,6 +3091,19 @@ packages:
     dependencies:
       '@babel/core': registry.npmmirror.com/@babel/core/7.19.3
       '@babel/helper-define-polyfill-provider': registry.npmmirror.com/@babel/helper-define-polyfill-provider/0.3.3_@babel+core@7.19.3
+    transitivePeerDependencies:
+      - supports-color
+    dev: true
+
+  registry.npmmirror.com/babel-plugin-transform-default-named-imports/1.2.2:
+    resolution: {integrity: sha512-xLfgaSMqNEgGhcCIXvSqdWjbcucLPDSNUmVHBYyLLWENLDJ3uOOBRFWyHCItzT727OQeMbpML8DN8ntUS9loSw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/babel-plugin-transform-default-named-imports/-/babel-plugin-transform-default-named-imports-1.2.2.tgz}
+    name: babel-plugin-transform-default-named-imports
+    version: 1.2.2
+    engines: {node: '>= 12.x'}
+    dependencies:
+      '@babel/core': registry.npmmirror.com/@babel/core/7.19.3
+      '@babel/types': registry.npmmirror.com/@babel/types/7.19.3
+      webpack-node-module-types: registry.npmmirror.com/webpack-node-module-types/1.2.2
     transitivePeerDependencies:
       - supports-color
     dev: true
@@ -6251,6 +6276,18 @@ packages:
     dev: true
     optional: true
 
+  registry.npmmirror.com/markdown-to-jsx/7.1.7_react@18.2.0:
+    resolution: {integrity: sha512-VI3TyyHlGkO8uFle0IOibzpO1c1iJDcXcS/zBrQrXQQvJ2tpdwVzVZ7XdKsyRz1NdRmre4dqQkMZzUHaKIG/1w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/markdown-to-jsx/-/markdown-to-jsx-7.1.7.tgz}
+    id: registry.npmmirror.com/markdown-to-jsx/7.1.7
+    name: markdown-to-jsx
+    version: 7.1.7
+    engines: {node: '>= 10'}
+    peerDependencies:
+      react: '>= 0.14.0'
+    dependencies:
+      react: registry.npmmirror.com/react/18.2.0
+    dev: false
+
   registry.npmmirror.com/matcher/3.0.0:
     resolution: {integrity: sha512-OkeDaAZ/bQCxeFAozM55PKcKU0yJMPGifLwV4Qgjitu+5MoAfSQN4lsLJeXZ1b8w0x+/Emda6MZgXS1jvsapng==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/matcher/-/matcher-3.0.0.tgz}
     name: matcher
@@ -8647,6 +8684,14 @@ packages:
     engines: {node: '>=4'}
     dev: true
 
+  registry.npmmirror.com/unist-util-stringify-position/3.0.2:
+    resolution: {integrity: sha512-7A6eiDCs9UtjcwZOcCpM4aPII3bAAGv13E96IkawkOAW0OhH+yRxtY0lzo8KiHpzEMfH7Q+FizUmwp8Iqy5EWg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/unist-util-stringify-position/-/unist-util-stringify-position-3.0.2.tgz}
+    name: unist-util-stringify-position
+    version: 3.0.2
+    dependencies:
+      '@types/unist': registry.npmmirror.com/@types/unist/2.0.6
+    dev: false
+
   registry.npmmirror.com/universalify/0.1.2:
     resolution: {integrity: sha512-rBJeI5CXAlmy1pV+617WB9J63U6XcazHHF2f2dbJix4XzpUF0RS3Zbj0FGIOCAva5P/d/GBOYaACQ1w+0azUkg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/universalify/-/universalify-0.1.2.tgz}
     name: universalify
@@ -8914,6 +8959,13 @@ packages:
     dependencies:
       clone-deep: registry.npmmirror.com/clone-deep/4.0.1
       wildcard: registry.npmmirror.com/wildcard/2.0.0
+    dev: true
+
+  registry.npmmirror.com/webpack-node-module-types/1.2.2:
+    resolution: {integrity: sha512-cn1R6CS8UjjtDx/B/hbq7PrNoOXn8cWNrvnpMWC1+Jwv0XiVx+qnuBYInDLqAvoXN3Qo6wYmsnrRLzoo0wlwAg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/webpack-node-module-types/-/webpack-node-module-types-1.2.2.tgz}
+    name: webpack-node-module-types
+    version: 1.2.2
+    engines: {node: '>= 12.x'}
     dev: true
 
   registry.npmmirror.com/webpack-sources/3.2.3:

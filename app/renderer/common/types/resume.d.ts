@@ -178,7 +178,7 @@ export interface IntactResume {
   skill: { desc: string }[];
   skillList: string[];
   hobby: string;
-  evaluation: string[];
+  evaluation: string;
   evaluationList: string[];
   certificate: Certificate[];
   certificateList: string[];

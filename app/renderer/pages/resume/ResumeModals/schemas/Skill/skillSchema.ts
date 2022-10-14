@@ -24,6 +24,11 @@ export const skillSchema: Schema = {
   },
 };
 
-export const skillAdapter = (formValue: any) => {
-  return formValue.list;
+export const skillAdapter = {
+  form2data: (form: any) => {
+    return form.list;
+  },
+  data2form: (data: any) => {
+    return data;
+  },
 };

@@ -27,11 +27,15 @@ export const RenderFormArray: FC<IRenderFormArrayProps> = ({
     ? initialValues
     : initialValues[name];
   const itemSchema = schema.items as WidgetSchema;
-  const widget = itemSchema.widget || 'simpleList';
+
+  const widget = schema.widget || 'simpleList';
   const Widget = (widgets as any)[widget];
   return (
-    <div>
-      <Widget initialValues={_initialValues} schema={itemSchema} name={name} />
-    </div>
+    <Widget
+      title={schema.title}
+      initialValues={_initialValues}
+      schema={itemSchema}
+      name={name}
+    />
   );
 };

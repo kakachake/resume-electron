@@ -24,8 +24,16 @@ export const ResumeModals: FC<IResumeModalProps> & {
   showModal: ({ type }: { type: keyof IntactResume }) => void;
 } = ({ destroy, type }) => {
   const schema = (resumeSchema as any)[type];
-  const adapter = (resumeAdapter as any)[type + 'Adapter'] || ((data: any) => data);
-  const { [type]: initialValues } = useAppSelector((state) => state.resume.resume);
+  const adapter = (resumeAdapter as any)[type + 'Adapter'] || {
+    form2data: (data: any) => data,
+    data2form: (data: any) => data,
+  };
+  const { [type]: initialValues } = useAppSelector((state) => {
+    console.log(state.resume.resume);
+    return state.resume.resume;
+  });
+  console.log(type, initialValues);
+
   const dispatch = useAppDispatch();
   const formRef = useRef<IFormRef>(null);
   const submit = () => {
@@ -38,7 +46,7 @@ export const ResumeModals: FC<IResumeModalProps> & {
         dispatch(
           updateResume({
             key: type,
-            value: adapter(formValue),
+            value: adapter.form2data(formValue),
           })
         );
         destroy?.();
@@ -52,7 +60,7 @@ export const ResumeModals: FC<IResumeModalProps> & {
         ref={formRef}
         schema={schema}
         className={styles.form}
-        initialValues={initialValues}
+        initialValues={adapter.data2form(initialValues)}
       />
       <ReButton onClick={submit}>提交</ReButton>
       <ReButton onClick={destroy}>关闭</ReButton>

@@ -11,7 +11,7 @@ const ReDialog: FC<IDialogModal> & {
   confirm: (config: IDialogModal) => void;
 } = ({
   title,
-  width = 520,
+  width = 700,
   visible,
   className,
   showFooter = true,

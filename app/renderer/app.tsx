@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import { store } from './store';
 import ThemeContextProvider from './context/themeContext';
 import ThemeToggle from './components/ThemeToggle/ThemeToggle';
+
 const App: FC = () => {
   return (
     <ThemeContextProvider>

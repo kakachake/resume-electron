@@ -9,6 +9,7 @@ import React, {
 } from 'react';
 import cname from 'classnames';
 import styles from './ReInput.module.less';
+import { getRandomId } from '../../utils';
 
 export interface ReInputProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
@@ -76,6 +77,7 @@ export interface ReInputProps
    * @description 是否背景透明
    */
   bgTransparent?: boolean;
+  autoHeight?: boolean;
   /**
    * @description 回调函数
    */
@@ -100,15 +102,30 @@ const ReInput: FC<ReInputProps> = ({
   maxLength,
   bgTransparent = false,
   onChange,
+  autoHeight = false,
   ...args
 }) => {
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState<string>(value as string);
   console.log(value);
-
+  const textareaRef = React.createRef<HTMLTextAreaElement>();
   useLayoutEffect(() => {
     setInputValue(value as string);
   }, [value]);
+
+  useEffect(() => {
+    if (autoHeight && controlType === 'textarea') {
+      const textarea = textareaRef.current;
+      if (textarea) {
+        console.log(textarea.scrollHeight);
+        if (textarea.scrollHeight > 0) {
+          textarea.style.height = textarea.scrollHeight + 'px';
+        }
+        textarea.style.height = 'auto';
+        // textarea.style.height = textarea.scrollHeight + 'px';
+      }
+    }
+  }, [inputValue]);
 
   const onInput = (e: FormEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { value } = e.target as HTMLInputElement;
@@ -163,6 +180,7 @@ const ReInput: FC<ReInputProps> = ({
   const renderTextArea = () => {
     return (
       <textarea
+        ref={textareaRef}
         className={cname(styles['re-textarea-textarea'])}
         id={id}
         disabled={disabled}

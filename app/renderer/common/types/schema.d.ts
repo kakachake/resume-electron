@@ -16,7 +16,6 @@ declare module 'json-schema' {
     maximum?: number;
     widget?: string;
     exclusiveMaximum?: boolean;
-
     minimum?: number;
     exclusiveMinimum?: boolean;
     maxLength?: number;
@@ -61,6 +60,7 @@ declare module 'json-schema' {
       | 'dateTime'
       | 'date'
       | 'time'
+      | 'markdown'
       | 'upload';
     width?: string;
     flex?: boolean;

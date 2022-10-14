@@ -1,5 +1,5 @@
 const path = require('path');
-const baseConfig = require('./webpack.base');
+const baseConfig = require('./webpack.base.cjs');
 const { merge } = require('webpack-merge');
 
 module.exports = mainConfig = merge(baseConfig, {
@@ -8,7 +8,7 @@ module.exports = mainConfig = merge(baseConfig, {
   entry: path.resolve(__dirname, '../app/main/electron.ts'),
   target: 'electron-main',
   output: {
-    filename: 'electron.js',
+    filename: 'electron.cjs',
     path: path.resolve(__dirname, '../dist/'),
   },
 });

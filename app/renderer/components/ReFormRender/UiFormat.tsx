@@ -9,6 +9,7 @@ import {
   OnChangeType,
   Type,
 } from '@douyinfe/semi-foundation/lib/es/datePicker/foundation';
+import ReMarkDown from '../ReMarkDown/ReMarkDown';
 
 export const UiFormat: {
   [key in
@@ -21,8 +22,10 @@ export const UiFormat: {
     | 'dateTime'
     | 'date'
     | 'time'
+    | 'markdown'
     | 'upload']?: React.FC<any>;
 } = {
+  markdown: ReMarkDown,
   textarea: (props: any) => <ReInput {...props} controlType="textarea" />,
   dateTime: function DateTimeAdpter({
     type,

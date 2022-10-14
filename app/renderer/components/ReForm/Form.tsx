@@ -44,24 +44,22 @@ const Form = (
   );
 
   return (
-    <div>
-      <form
-        onReset={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          formInstance.resetFields(); /* 重置表单 */
-        }}
-        onSubmit={(e) => {
-          e.preventDefault();
-          e.stopPropagation();
-          formInstance.submit(); /* 提交表单 */
-        }}
-        style={style}
-        className={className}
-      >
-        {RenderChildren}
-      </form>
-    </div>
+    <form
+      onReset={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        formInstance.resetFields(); /* 重置表单 */
+      }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        formInstance.submit(); /* 提交表单 */
+      }}
+      style={style}
+      className={className}
+    >
+      {RenderChildren}
+    </form>
   );
 };
 

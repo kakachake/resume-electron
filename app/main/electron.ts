@@ -1,4 +1,5 @@
 const path = require('path');
+
 const { app, BrowserWindow, ipcMain } = require('electron');
 const ROOT_PATH = path.join(app.getAppPath(), '../');
 
