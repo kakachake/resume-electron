@@ -6,13 +6,13 @@ export const workExperienceSchema: Schema = {
   properties: {
     list: {
       type: 'array',
-      title: '项目经验',
+      title: '工作经历',
       widget: 'tabList',
       items: {
         type: 'object',
         flex: false,
         properties: {
-          projectName: {
+          department: {
             type: 'string',
             title: '公司名称',
           },
@@ -20,11 +20,21 @@ export const workExperienceSchema: Schema = {
             type: 'string',
             title: '职位',
           },
-          date: {
-            title: '时间',
+          beginTime: {
+            type: 'string',
+            title: '开始时间',
             format: 'dateTime',
-            type: 'range',
           },
+          endTime: {
+            type: 'string',
+            title: '结束时间',
+            format: 'dateTime',
+          },
+          // date: {
+          //   title: '时间',
+          //   format: 'dateTime',
+          //   type: 'range',
+          // },
           content: {
             type: 'string',
             format: 'markdown',

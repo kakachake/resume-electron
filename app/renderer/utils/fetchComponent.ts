@@ -1,4 +1,5 @@
 import axios from 'axios';
+import Markdown from 'markdown-to-jsx';
 import React, { ComponentType } from 'react';
 import * as ReactRedux from 'react-redux';
 
@@ -26,6 +27,7 @@ export const fetchComponent = async (
 const packages = {
   react: React,
   ['react-redux']: ReactRedux,
+  ['markdown-to-jsx']: Markdown,
 };
 
 const getParsedModule = (

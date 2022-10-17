@@ -20,11 +20,21 @@ export const projectExperienceSchema: Schema = {
             type: 'string',
             title: '职位',
           },
-          date: {
-            title: '时间',
+          beginTime: {
+            type: 'string',
+            title: '开始时间',
             format: 'dateTime',
-            type: 'range',
           },
+          endTime: {
+            type: 'string',
+            title: '结束时间',
+            format: 'dateTime',
+          },
+          // date: {
+          //   title: '时间',
+          //   format: 'dateTime',
+          //   type: 'range',
+          // },
           content: {
             type: 'string',
             format: 'markdown',

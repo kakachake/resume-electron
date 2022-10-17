@@ -6,16 +6,20 @@ import { shell } from 'electron';
 import { ROUTER_ENTRY } from '../../constants/router';
 import { isHttpOrHttps } from '../../utils/router';
 import { useAppDispatch, useAppSelector } from '../../store';
-import { setAppName } from '@src/store/slice/global';
-import ReInput from '../../components/ReInput/ReInput';
+import { useOpenWindow } from '../../hooks/useOpenWindow';
+
 const Root: FC = () => {
+  const openWindow = useOpenWindow();
+
   const appName = useAppSelector((state) => state.global.appName);
 
   const navigate = useNavigate();
 
   const onRouterToLink = (item: typeof ROUTER_ENTRY[number]) => {
     if (isHttpOrHttps(item.link)) {
-      shell.openExternal(item.link);
+      console.log('openWindow', openWindow);
+
+      openWindow.current?.(item.link);
     } else {
       navigate(item.link);
     }
@@ -48,7 +52,7 @@ const Root: FC = () => {
             <a
               className={style.link}
               onClick={() => {
-                shell.openExternal('https://github.com/kakachake');
+                openWindow.current?.('https://github.com/kakachake');
               }}
               style={{ cursor: 'pointer' }}
               target="_blank"

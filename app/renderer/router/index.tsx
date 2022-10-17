@@ -1,8 +1,11 @@
 import Root from '@src/pages/root/Root';
-import { FC } from 'react';
+import { FC, lazy, Suspense } from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 import ComT from '../pages/comT/comT';
-import Resume from '../pages/resume/Resume';
+// import Resume from '../pages/resume/Resume';
+
+const Resume = lazy(() => import('../pages/resume/Resume'));
+
 export const route: (RouteObject & {
   name: string;
 })[] = [
@@ -14,7 +17,11 @@ export const route: (RouteObject & {
   {
     name: 'resume',
     path: 'resume',
-    element: <Resume />,
+    element: (
+      <Suspense fallback={<div>loading...</div>}>
+        <Resume />
+      </Suspense>
+    ),
   },
   {
     name: 'comT',

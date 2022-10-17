@@ -15,7 +15,7 @@ import styles from './Base.module.less';
 import { store, useAppDispatch, useAppSelector } from '@root/app/renderer/store';
 import { Provider } from 'react-redux';
 import { updateResume } from '@root/app/renderer/store/slice/resume';
-import ModelProvider from '../ModelProvider';
+import ModelProvider from '../../ModelProvider';
 
 interface IBaseProps {
   destroy?: () => void;

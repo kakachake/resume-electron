@@ -1,6 +1,6 @@
 import ReButton from '@root/app/renderer/components/ReButton/ReButton';
 import { ROUTER } from '@root/app/renderer/constants/router';
-import { toPrintPdf } from '@root/app/renderer/utils/htmlToPdf';
+
 import { FC } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './ResumeAction.module.less';
@@ -9,7 +9,10 @@ const ResumeAction: FC = () => {
   const navigate = useNavigate();
   const onBack = () => navigate(ROUTER.root);
   const onExport = () => {
-    toPrintPdf('简历');
+    import('@root/app/renderer/utils/htmlToPdf').then((module) => {
+      const { toPrintPdf } = module;
+      toPrintPdf('简历');
+    });
   };
   return (
     <div className={styles.actions}>

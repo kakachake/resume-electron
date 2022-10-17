@@ -107,21 +107,23 @@ const ReInput: FC<ReInputProps> = ({
 }) => {
   const [focus, setFocus] = useState(false);
   const [inputValue, setInputValue] = useState<string>(value as string);
-  console.log(value);
+
   const textareaRef = React.createRef<HTMLTextAreaElement>();
   useLayoutEffect(() => {
     setInputValue(value as string);
   }, [value]);
 
   useEffect(() => {
-    if (autoHeight && controlType === 'textarea') {
-      const textarea = textareaRef.current;
-      if (textarea) {
+    const textarea = textareaRef.current;
+    if (textarea) {
+      textarea.style.height = 'auto';
+      if (autoHeight && controlType === 'textarea') {
         console.log(textarea.scrollHeight);
         if (textarea.scrollHeight > 0) {
           textarea.style.height = textarea.scrollHeight + 'px';
+        } else {
+          textarea.style.height = 'auto';
         }
-        textarea.style.height = 'auto';
         // textarea.style.height = textarea.scrollHeight + 'px';
       }
     }
