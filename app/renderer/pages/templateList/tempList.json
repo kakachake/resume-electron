@@ -1,0 +1,8 @@
+{
+  "template1": {
+    "name": "template1",
+    "url": "http://192.168.0.4:3030/bundle.js",
+    "preview": "http://192.168.0.4:3030/preview.jpg",
+    "id": 1
+  }
+}

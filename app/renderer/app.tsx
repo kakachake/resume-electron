@@ -18,7 +18,7 @@ const App: FC = () => {
           style={{
             position: 'fixed',
             right: '20px',
-            top: '20px',
+            top: '15px',
           }}
         />
         <HashRouter>

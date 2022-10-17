@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, memo, useEffect, useLayoutEffect, useMemo } from 'react';
 // import { getAppPath } from '../../utils/appPath';
 // import fileAction from '../../utils/file';
 import ResumeContent from './ResumeContent/ResumeContent';
@@ -12,6 +12,9 @@ const Resume: FC = () => {
   //     console.log(res);
   //   });
   // });
+
+  console.log('render Resume');
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -26,4 +29,4 @@ const Resume: FC = () => {
     </div>
   );
 };
-export default Resume;
+export default memo(Resume);

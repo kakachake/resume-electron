@@ -3,25 +3,27 @@ import Markdown from 'markdown-to-jsx';
 import React, { ComponentType } from 'react';
 import * as ReactRedux from 'react-redux';
 
-export const fetchComponent = async (
+export const fetchComponent = (
   componentSrc: string
 ): Promise<{ default: ComponentType<any> }> => {
-  const text = await axios
-    .get(componentSrc + '?t=' + new Date().getTime())
-    .then((res) => {
-      return res.data;
-    })
-    .catch((err) => {
-      throw new Error('Network response was not ok');
+  return new Promise(async (resolve, reject) => {
+    const text = await axios
+      .get(componentSrc + '?t=' + new Date().getTime())
+      .then((res) => {
+        console.log(res);
+
+        return res.data;
+      })
+      .catch((err) => {
+        throw new Error('Network response was not ok');
+      });
+
+    const module = getParsedModule(text);
+
+    resolve({
+      default: module.exports,
     });
-  // console.log(text);
-
-  const module = getParsedModule(text);
-  console.log(module.exports);
-
-  return {
-    default: module.exports,
-  };
+  });
 };
 
 const packages = {

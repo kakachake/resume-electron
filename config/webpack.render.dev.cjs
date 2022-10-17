@@ -2,6 +2,7 @@ const path = require('path');
 const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.cjs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 
 module.exports = renderConfig = merge(baseConfig, {
   mode: 'development',
@@ -51,6 +52,11 @@ module.exports = renderConfig = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../app/renderer/index.html'),
       filename: 'index.html',
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload', // preload兼容性更好
+      as: 'script',
+      // rel: 'prefetch' // prefetch兼容性更差
     }),
   ],
   devServer: {

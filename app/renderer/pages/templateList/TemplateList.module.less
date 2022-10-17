@@ -1,0 +1,51 @@
+.content {
+  overflow: hidden;
+  display: flex;
+  justify-items: center;
+  .navigation {
+    transition: all 0.5s;
+    position: absolute;
+    left: 1rem;
+    &.hide {
+      left: -17.5rem;
+    }
+    .rectMenu {
+      // display: none;
+      position: absolute;
+      z-index: 999;
+      top: 50%;
+      width: 32px;
+      height: 64px;
+      line-height: 64px;
+      text-align: center;
+      margin-top: -32px;
+      background: #ffffff;
+      box-shadow: 8px 0 8px 0 rgba(0, 0, 0, 0.1);
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
+      right: -32px;
+      .rect-icon {
+        background-image: url('../../../../assets//icon/back_blank.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        transition: all 0.5s;
+        width: 14px;
+        height: 14px;
+        position: absolute;
+        top: 25px;
+        left: 9px;
+        &.rect-icon-hidden {
+          transform: rotate(180deg);
+        }
+      }
+    }
+  }
+  .resumeContent {
+    flex: 1 1 auto;
+    margin-left: 20rem;
+    transition: all 0.5s;
+    &.hide {
+      margin-left: 0rem;
+    }
+  }
+}

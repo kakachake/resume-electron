@@ -11,6 +11,8 @@ const DynamicComponent: FC<IDynamicComponentProps> = ({ src, children, ...props 
   const Component = useMemo(() => {
     return lazy(() => fetchComponent(src));
   }, [src]);
+  console.log(Component);
+
   return (
     <Suspense
       fallback={

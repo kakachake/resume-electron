@@ -4,14 +4,18 @@
   "author": "",
   "type": "module",
   "description": "简历平台桌面应用",
-  "main": "./app/main/electron.js",
+  "main": "./dist/electron.cjs",
   "scripts": {
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder",
     "start": "concurrently  'npm:start:render' 'npm:start:main-watch' ",
     "start:main-watch": "nodemon  --exec npm run start:main",
     "start:main": "webpack --config ./config/webpack.main.dev.cjs && electron ./dist/electron.cjs",
     "start:render": "webpack serve --config ./config/webpack.render.dev.cjs",
     "start:web": "webpack serve --config ./config/webpack.web.dev.cjs  --node-env development",
     "build:web": "webpack --config ./config/webpack.web.dev.cjs --node-env production",
+    "build:render": "webpack --config ./config/webpack.render.dev.cjs --node-env production",
+    "build:main": "webpack --config ./config/webpack.main.dev.cjs --node-env production",
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
     "lint": "eslint --ext .js,.jsx,.ts,.tsx --fix app/",
@@ -26,7 +30,6 @@
     "classnames": "^2.3.2",
     "core-js": "^3.25.4",
     "css-minimizer-webpack-plugin": "^4.2.2",
-    "electron": "^21.0.1",
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "markdown-to-jsx": "^7.1.7",
@@ -52,6 +55,7 @@
     "@types/redux-logger": "^3.0.9",
     "@typescript-eslint/eslint-plugin": "^5.38.1",
     "@typescript-eslint/parser": "^5.38.1",
+    "@vue/preload-webpack-plugin": "^2.0.0",
     "autoprefixer": "^10.4.12",
     "axios": "^1.0.0",
     "babel-loader": "^8.2.5",
@@ -62,6 +66,8 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "cz-conventional-changelog": "^3.3.0",
+    "electron": "^21.0.1",
+    "electron-builder": "^23.6.0",
     "eslint": "^8.24.0",
     "eslint-config-alloy": "^4.7.0",
     "eslint-config-prettier": "^8.5.0",
@@ -89,6 +95,34 @@
   "config": {
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "build": {
+    "appId": "com.kakachake.resume",
+    "productName": "简历平台",
+    "copyright": "copyright © 2021 kakachake",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "dist/**/*",
+      "node_modules/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "target": "dmg",
+      "icon": "build/icon.icns"
+    },
+    "win": {
+      "target": [
+        "nsis",
+        "msi"
+      ],
+      "icon": "build/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "build/icon.png"
     }
   }
 }

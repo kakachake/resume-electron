@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import { IntactResume, SliderItem } from '../../common/types/resume';
+import { RESUME_TOOLBAR_MAPS } from '../../constants/resume';
 
 export interface ResumeState {
   toolbarList: {
@@ -7,7 +8,7 @@ export interface ResumeState {
     isNotAdd: SliderItem[];
   };
   resume: Partial<IntactResume>;
-  resumeToolbarKeys: []; //“已添加模块”的所有 key
+  resumeToolbarKeys: (keyof typeof RESUME_TOOLBAR_MAPS)[]; //“已添加模块”的所有 key
 }
 
 const initialState: ResumeState = {

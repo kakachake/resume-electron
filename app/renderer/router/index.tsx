@@ -2,9 +2,11 @@ import Root from '@src/pages/root/Root';
 import { FC, lazy, Suspense } from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
 import ComT from '../pages/comT/comT';
+
 // import Resume from '../pages/resume/Resume';
 
 const Resume = lazy(() => import('../pages/resume/Resume'));
+const TemplateList = lazy(() => import('../pages/templateList/TemplateList'));
 
 export const route: (RouteObject & {
   name: string;
@@ -24,6 +26,15 @@ export const route: (RouteObject & {
     ),
   },
   {
+    name: 'templateList',
+    path: 'templateList',
+    element: (
+      <Suspense fallback={<div>loading...</div>}>
+        <TemplateList />
+      </Suspense>
+    ),
+  },
+  {
     name: 'comT',
     path: 'comT',
     element: <ComT />,
@@ -31,6 +42,8 @@ export const route: (RouteObject & {
 ];
 
 export const GetRoute: FC = () => {
+  console.log('route Render');
+
   const routes = useRoutes(route);
   return routes;
 };

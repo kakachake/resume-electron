@@ -4,7 +4,7 @@ const baseConfig = require('./webpack.base.cjs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { DefinePlugin } = require('webpack');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
+const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
 const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
 const TerserWebpackPlugin = require('terser-webpack-plugin');
 const isDev = process.env.NODE_ENV === 'development';
@@ -59,6 +59,11 @@ module.exports = renderConfig = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../app/renderer/index.html'),
       filename: 'index.html',
+    }),
+    new PreloadWebpackPlugin({
+      rel: 'preload', // preload兼容性更好
+      as: 'script',
+      // rel: 'prefetch' // prefetch兼容性更差
     }),
     new DefinePlugin({
       'process.env.target': JSON.stringify('web'),

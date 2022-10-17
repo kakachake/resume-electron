@@ -2,16 +2,21 @@
 export const ROUTER = {
   root: '/',
   resume: '/resume',
+  templateList: '/templateList',
 };
 
 export const ROUTER_ENTRY: TSRouter.Item[] = [
   {
     text: '介绍',
-    link: 'intro',
+    link: ROUTER.root,
   },
   {
     text: '简历',
-    link: 'resume',
+    link: ROUTER.resume,
+  },
+  {
+    text: '模板',
+    link: ROUTER.templateList,
   },
   {
     text: '作品',
