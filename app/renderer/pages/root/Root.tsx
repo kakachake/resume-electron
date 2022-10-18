@@ -7,6 +7,7 @@ import { ROUTER_ENTRY } from '../../constants/router';
 import { isHttpOrHttps } from '../../utils/router';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { useOpenWindow } from '../../hooks/useOpenWindow';
+import ReTheme from '../../components/ReTheme/ReTheme';
 
 const Root: FC = () => {
   const openWindow = useOpenWindow();
@@ -24,13 +25,17 @@ const Root: FC = () => {
       navigate(item.link);
     }
   };
+  const { currentTheme } = useAppSelector((state) => state.theme);
+
   return (
     <div className={style.root}>
       <div className={style.container}>
         <img className="logo" src={logo} alt="" />
-
         <div className={style.title}>{appName}</div>
-        <div className={style.tips}>一个模板简历制作平台, 让你的简历更加出众 ~</div>
+        <div className={style.tips}>一个模板简历制作平台, 让你的简历更加出众 ~!</div>
+        <div>
+          <ReTheme />
+        </div>
         <div className={style.action}>
           {ROUTER_ENTRY.map((menu, idx) => {
             return (

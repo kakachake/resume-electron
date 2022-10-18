@@ -12,14 +12,19 @@ export const useTemplatePreview = (template: Template | null) => {
   const [resumeToolbarList, setResumeToolbarList] = useState<ResumeToolbarItem[]>([]);
 
   useEffect(() => {
-    axios.get(previewJson).then((res) => {
-      setResume(res.data);
-      const _resumeToolbarKeys: string[] = [];
-      Object.keys(res.data).forEach((key) => {
-        _resumeToolbarKeys.push(key);
+    axios
+      .get(previewJson)
+      .then((res) => {
+        setResume(res.data);
+        const _resumeToolbarKeys: string[] = [];
+        Object.keys(res.data).forEach((key) => {
+          _resumeToolbarKeys.push(key);
+        });
+        setResumeToolbarList(_resumeToolbarKeys as ResumeToolbarItem[]);
+      })
+      .catch((err) => {
+        console.log(err);
       });
-      setResumeToolbarList(_resumeToolbarKeys as ResumeToolbarItem[]);
-    });
   }, [template]);
   return [resume, resumeToolbarList] as const;
 };

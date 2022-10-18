@@ -1,6 +1,7 @@
 import Root from '@src/pages/root/Root';
 import { FC, lazy, Suspense } from 'react';
 import { RouteObject, useRoutes } from 'react-router-dom';
+import { useInitThemeConfig } from '../hooks/useThemeActionHooks';
 import ComT from '../pages/comT/comT';
 
 // import Resume from '../pages/resume/Resume';
@@ -43,7 +44,7 @@ export const route: (RouteObject & {
 
 export const GetRoute: FC = () => {
   console.log('route Render');
-
+  useInitThemeConfig();
   const routes = useRoutes(route);
   return routes;
 };

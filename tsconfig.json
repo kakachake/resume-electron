@@ -21,7 +21,8 @@
       "@src/*": ["./app/renderer/*"]
     },
     "moduleResolution": "node",
-    "plugins": [{ "name": "typescript-plugin-css-modules" }]
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
+    "resolveJsonModule": true
   },
   "exclude": ["dist", "node_modules"], // 这里需要排除掉 dist 目录和 node_modules 目录，不进行检查
   "include": ["app/**/*.ts", "app/**/*.tsx", "app/**/*.d.ts"]

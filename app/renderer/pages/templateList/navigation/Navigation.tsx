@@ -1,12 +1,16 @@
 import ReScrollBox from '@root/app/renderer/components/ReScrollBox/ReScrollBox';
-import { useAppSelector } from '@root/app/renderer/store';
-import { Template } from '@root/app/renderer/store/slice/template';
+import { useAppDispatch, useAppSelector } from '@root/app/renderer/store';
+import { setSelectedTemplate, Template } from '@root/app/renderer/store/slice/template';
 import { FC } from 'react';
 import styles from './Navigation.module.less';
 import UseIcon from '@assets/icon/use.png';
 import ReButton from '@root/app/renderer/components/ReButton/ReButton';
 
 const Navigation: FC = () => {
+  const dispatch = useAppDispatch();
+  const selectTemplate = (template: Template) => {
+    dispatch(setSelectedTemplate(template));
+  };
   const HEADER_HEIGHT = 116;
   const height = document.documentElement.clientHeight;
   const { templateList, selectedTemplate } = useAppSelector((state) => state.template);
@@ -26,7 +30,7 @@ const Navigation: FC = () => {
                       size="middle"
                       className={styles['view-btn']}
                       onClick={() => {
-                        console.log(1);
+                        selectTemplate(template);
                       }}
                     >
                       预览模板

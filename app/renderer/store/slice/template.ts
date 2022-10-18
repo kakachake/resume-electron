@@ -26,14 +26,14 @@ const initialState: TemplateState = {
       name: 'template1',
       url: 'http://192.168.0.4:3030/bundle.js',
       cover: 'http://192.168.0.4:3030/preview.jpg',
-      previewJson: 'http://192.168.0.4:3030/preview.json',
+      previewJson: 'http://192.168.0.4:3030/preview1.json',
       id: '2',
     },
     {
       name: 'template1',
       url: 'http://192.168.0.4:3030/bundle.js',
       cover: 'http://192.168.0.4:3030/preview.jpg',
-      previewJson: 'http://192.168.0.4:3030/preview.json',
+      previewJson: 'http://192.168.0.4:3030/preview2.json',
       id: '3',
     },
   ],
@@ -41,7 +41,7 @@ const initialState: TemplateState = {
     name: 'template1',
     url: 'http://192.168.0.4:3030/bundle.js',
     cover: 'http://192.168.0.4:3030/preview.jpg',
-    previewJson: 'http://192.168.0.4:3030/preview.json',
+    previewJson: 'http://192.168.0.4:3030/preview1.json',
     id: '2',
   },
 };
@@ -53,9 +53,12 @@ const templateSlice = createSlice({
     setTemplateList: (state, action) => {
       state.templateList = action.payload;
     },
+    setSelectedTemplate: (state, action) => {
+      state.selectedTemplate = action.payload;
+    },
   },
 });
 
-export const { setTemplateList } = templateSlice.actions;
+export const { setTemplateList, setSelectedTemplate } = templateSlice.actions;
 
 export default templateSlice.reducer;

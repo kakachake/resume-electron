@@ -77,11 +77,6 @@
     }
   }
 }
-
-:global {
-  body[theme-mode='light'] {
-    .logo {
-      filter: invert(1);
-    }
-  }
+.logo {
+  filter: invert(var(--invert));
 }
