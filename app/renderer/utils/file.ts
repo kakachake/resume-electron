@@ -4,7 +4,11 @@ const fileAction = {
   read: (path: string, encoding?: BufferEncoding): Promise<string> => {
     return fsPromiseAPIs.readFile(path, { encoding: encoding || 'utf8' });
   },
-  write: (path: string, content: any, encoding: BufferEncoding): Promise<void> => {
+  write: (
+    path: string,
+    content: any,
+    encoding: BufferEncoding = 'utf-8'
+  ): Promise<void> => {
     let updateContent = typeof content === 'string' ? content : JSON.stringify(content);
     return fsPromiseAPIs.writeFile(path, updateContent, { encoding: encoding || 'utf8' });
   },
@@ -25,6 +29,9 @@ const fileAction = {
   canRead: (path: string) => {
     // 文件可读
     return fsPromiseAPIs.access(path, fs.constants.R_OK);
+  },
+  mkdirDir: (path: string): Promise<string | undefined> => {
+    return fsPromiseAPIs.mkdir(path, { recursive: true });
   },
 };
 

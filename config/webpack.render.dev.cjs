@@ -8,7 +8,8 @@ module.exports = renderConfig = merge(baseConfig, {
   mode: 'development',
   devtool: 'source-map',
   entry: {
-    index: path.resolve(__dirname, '../app/renderer/index.tsx'),
+    index: path.resolve(__dirname, '../app/renderer/Index.tsx'),
+    setting: path.resolve(__dirname, '../app/renderer/windowPages/setting/Index.tsx'),
   },
   target: 'electron-renderer',
   output: {
@@ -52,6 +53,12 @@ module.exports = renderConfig = merge(baseConfig, {
     new HtmlWebpackPlugin({
       template: path.resolve(__dirname, '../app/renderer/index.html'),
       filename: 'index.html',
+      chunks: ['index'],
+    }),
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, '../app/renderer/windowPages/setting/index.html'),
+      filename: 'setting.html',
+      chunks: ['setting'],
     }),
     new PreloadWebpackPlugin({
       rel: 'preload', // preload兼容性更好

@@ -1,5 +1,5 @@
 const path = require('path');
-
+require('./eventCatch');
 const { app, BrowserWindow, ipcMain } = require('electron');
 const ROOT_PATH = path.join(app.getAppPath(), '../');
 
@@ -17,9 +17,17 @@ function createWindow() {
       contextIsolation: false,
     },
   });
+  const settingWindow = new BrowserWindow({
+    width: 720,
+    height: 240,
+    webPreferences: {
+      nodeIntegration: true,
+      contextIsolation: false,
+    },
+  });
   if (isDev()) {
-    mainWindow.loadURL(`http://127.0.0.1:7001/#/`);
-    // mainWindow.loadURL(`http://127.0.0.1:73`);
+    mainWindow.loadURL(`http://127.0.0.1:7001/index.html`);
+    settingWindow.loadURL(`http://127.0.0.1:7001/setting.html`);
   } else {
     mainWindow.loadURL(`file://${path.join(__dirname, '../dist/index.html')}`);
   }

@@ -86,10 +86,11 @@ const ReDialog: FC<IDialogModal> & {
                     size="middle"
                     className="vis-dialog-footer-btn vis-dialog-footer-submit-btn"
                     onClick={() => {
-                      submitBtn?.callback &&
-                        Promise.resolve(submitBtn.callback()).then(() => {
-                          onClose && onClose();
-                        });
+                      submitBtn?.callback
+                        ? Promise.resolve(submitBtn.callback()).finally(() => {
+                            onClose && onClose();
+                          })
+                        : onClose && onClose();
                     }}
                   >
                     {submitBtn?.text || '确定'}
