@@ -5,14 +5,16 @@ import Navigation from './navigation/Navigation';
 import styles from './TemplateList.module.less';
 import TemplatePreview from './templatePreview/TemplatePreview';
 import cName from 'classnames';
+import { useAppSelector } from '../../store';
 
 const TemplateList: FC = () => {
   const [hide, setHide] = useState(false);
   const onHideClick = () => {
     setHide(!hide);
   };
+  const { selectedTemplate } = useAppSelector((state) => state.template);
   return (
-    <div>
+    <div className={styles.container}>
       <Header />
       <div className={styles.content}>
         <div

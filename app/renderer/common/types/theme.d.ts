@@ -15,6 +15,8 @@ declare namespace TSTheme {
     /**
      * @description 次背景颜色
      */
-    secondaryBackgroundColor: string;
+    secondaryBackgroundColor?: string;
+    invert: string;
+    ['theme-icon']?: string;
   }
 }

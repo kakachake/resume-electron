@@ -19,7 +19,7 @@ export const route: (RouteObject & {
   },
   {
     name: 'resume',
-    path: 'resume',
+    path: 'resume/:id',
     element: (
       <Suspense fallback={<div>loading...</div>}>
         <Resume />

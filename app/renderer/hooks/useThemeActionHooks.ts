@@ -36,7 +36,7 @@ export const useChangeCurrentTheme = () => {
 };
 
 export function changeCssVars(theme: TSTheme.Item) {
-  const { backgroundColor, fontColor, secondaryBackgroundColor } = theme;
+  const { backgroundColor, fontColor, secondaryBackgroundColor, invert } = theme;
   const root = document.documentElement;
   root.style.setProperty('--primary-color', fontColor);
   root.style.setProperty('--primary-background-color', backgroundColor);
@@ -44,7 +44,8 @@ export function changeCssVars(theme: TSTheme.Item) {
     '--primary-second-background-color',
     tintColor(backgroundColor, 0.1)
   );
-  root.style.setProperty('invert', '0');
+  root.style.setProperty('--invert', invert);
+  // root.style.setProperty('--theme-icon', theme['theme-icon']);
 }
 
 export function updateAppConfigThemeFile(key: string, value: any) {

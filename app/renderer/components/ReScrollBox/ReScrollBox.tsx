@@ -42,6 +42,7 @@ const ReScrollBox: FC<IScrollBoxProps> = ({
     onScrollTop && onScrollTop(_event.scrollTop);
   }
   let _style = { ...style };
+  console.log(style);
 
   if (maxHeight) {
     _style = { ..._style, maxHeight: `${maxHeight}px` };
@@ -51,7 +52,7 @@ const ReScrollBox: FC<IScrollBoxProps> = ({
       <div
         className={cName('scroll-box-hidden')}
         onScroll={onScroll}
-        style={{ maxHeight: `${maxHeight}px`, ..._style }}
+        style={{ ..._style }}
       >
         <div className="scroll-box-inter" style={innerStyle}>
           {children}

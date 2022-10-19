@@ -1,7 +1,7 @@
 // 模块路径
 export const ROUTER = {
   root: '/',
-  resume: '/resume',
+  resume: '/resume/:id',
   templateList: '/templateList',
 };
 
@@ -13,6 +13,7 @@ export const ROUTER_ENTRY: TSRouter.Item[] = [
   {
     text: '简历',
     link: ROUTER.resume,
+    name: 'resume',
   },
   {
     text: '模板',

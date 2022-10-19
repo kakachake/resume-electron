@@ -10,32 +10,30 @@ const TemplatePreview: FC = () => {
   const [height, setHeight] = useHeight(150);
   const { selectedTemplate } = useAppSelector((state) => state.template);
 
-  const [resume, resumeToolbarKeys] = useTemplatePreview(selectedTemplate);
-  if (!resume) {
-    return null;
-  }
+  const [url, resume, resumeToolbarKeys, loading] = useTemplatePreview(selectedTemplate);
+
   return (
     <div className={styles['resume-content']}>
       <ReScrollBox
         maxHeight={height}
         style={{
+          height: height + 'px',
           borderRadius: '0.375rem',
         }}
       >
-        <DynamicComponent
-          title={'简历制作平台'}
-          resume={resume}
-          resumeToolbarKeys={resumeToolbarKeys}
-          src="http://192.168.0.4:3030/bundle.js"
-        />
+        {!loading && selectedTemplate ? (
+          <DynamicComponent
+            title={'简历制作平台'}
+            resume={resume}
+            resumeToolbarKeys={resumeToolbarKeys}
+            src={url!}
+          />
+        ) : (
+          <div className={styles.selectInfo}>请先选择模板</div>
+        )}
       </ReScrollBox>
     </div>
   );
 };
 
 export default TemplatePreview;
-function useTemplate(
-  selectedTemplate: import('../../../store/slice/template').Template | null
-): [any, any] {
-  throw new Error('Function not implemented.');
-}

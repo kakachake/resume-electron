@@ -6,12 +6,14 @@ import { RESUME_TOOLBAR_LIST, RESUME_TOOLBAR_MAPS } from '../constants/resume';
 type ResumeToolbarItem = keyof typeof RESUME_TOOLBAR_MAPS;
 
 export const useTemplatePreview = (template: Template | null) => {
-  if (!template) return [null, null];
-  const { url, previewJson } = template;
   const [resume, setResume] = useState<any>(null);
   const [resumeToolbarList, setResumeToolbarList] = useState<ResumeToolbarItem[]>([]);
+  const [loading, setLoading] = useState(false);
+  const { previewJson } = template || {};
 
   useEffect(() => {
+    if (!previewJson) return;
+    setLoading(true);
     axios
       .get(previewJson)
       .then((res) => {
@@ -24,7 +26,10 @@ export const useTemplatePreview = (template: Template | null) => {
       })
       .catch((err) => {
         console.log(err);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }, [template]);
-  return [resume, resumeToolbarList] as const;
+  return [template?.url, resume, resumeToolbarList, loading] as const;
 };

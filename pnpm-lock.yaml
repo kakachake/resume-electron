@@ -47,6 +47,7 @@ specifiers:
   less-loader: ^11.0.0
   markdown-to-jsx: ^7.1.7
   nodemon: ^2.0.20
+  path-to-regexp: ^6.2.1
   postcss: ^8.4.17
   postcss-loader: ^7.0.1
   prettier: ^2.7.1
@@ -77,6 +78,7 @@ dependencies:
   html2canvas: registry.npmmirror.com/html2canvas/1.4.1
   jspdf: registry.npmmirror.com/jspdf/2.5.1
   markdown-to-jsx: registry.npmmirror.com/markdown-to-jsx/7.1.7_react@18.2.0
+  path-to-regexp: registry.npmmirror.com/path-to-regexp/6.2.1
   react: registry.npmmirror.com/react/18.2.0
   react-dom: registry.npmmirror.com/react-dom/18.2.0_react@18.2.0
   react-redux: registry.npmmirror.com/react-redux/8.0.4_5uumaiclxbdbzaqafclbf6maf4
@@ -7910,6 +7912,12 @@ packages:
     name: path-to-regexp
     version: 0.1.7
     dev: true
+
+  registry.npmmirror.com/path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/path-to-regexp/-/path-to-regexp-6.2.1.tgz}
+    name: path-to-regexp
+    version: 6.2.1
+    dev: false
 
   registry.npmmirror.com/path-type/4.0.0:
     resolution: {integrity: sha512-gDKb8aZMDeD/tZWs9P6+q0J9Mwkdl6xMV8TjnGP3qJVJ06bdMgkbBlLU8IdfOsIsFz2BW1rNVT3XuNEl8zPAvw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/path-type/-/path-type-4.0.0.tgz}

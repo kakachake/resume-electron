@@ -4,13 +4,15 @@ import logo from '@assets/logo.png';
 import { useNavigate } from 'react-router-dom';
 import { shell } from 'electron';
 import { ROUTER_ENTRY } from '../../constants/router';
-import { isHttpOrHttps } from '../../utils/router';
+import { compilePath, isHttpOrHttps } from '../../utils/router';
 import { useAppDispatch, useAppSelector } from '../../store';
 import { useOpenWindow } from '../../hooks/useOpenWindow';
 import ReTheme from '../../components/ReTheme/ReTheme';
+import { Modal } from '@douyinfe/semi-ui';
 
 const Root: FC = () => {
   const openWindow = useOpenWindow();
+  const selectedTemplate = useAppSelector((state) => state.template.selectedTemplate);
 
   const appName = useAppSelector((state) => state.global.appName);
 
@@ -22,10 +24,23 @@ const Root: FC = () => {
 
       openWindow.current?.(item.link);
     } else {
-      navigate(item.link);
+      if (item.name && item.name == 'resume') {
+        if (selectedTemplate) {
+          navigate(compilePath(item.link, { id: '123' }));
+        } else {
+          Modal.info({
+            title: '暂未选择模板',
+            content: '前去模板仓库选择？',
+            onOk: () => {
+              navigate(compilePath('/templateList'));
+            },
+          });
+        }
+      } else {
+        navigate(item.link);
+      }
     }
   };
-  const { currentTheme } = useAppSelector((state) => state.theme);
 
   return (
     <div className={style.root}>

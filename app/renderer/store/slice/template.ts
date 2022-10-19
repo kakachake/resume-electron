@@ -37,13 +37,7 @@ const initialState: TemplateState = {
       id: '3',
     },
   ],
-  selectedTemplate: {
-    name: 'template1',
-    url: 'http://192.168.0.4:3030/bundle.js',
-    cover: 'http://192.168.0.4:3030/preview.jpg',
-    previewJson: 'http://192.168.0.4:3030/preview1.json',
-    id: '2',
-  },
+  selectedTemplate: null,
 };
 
 const templateSlice = createSlice({

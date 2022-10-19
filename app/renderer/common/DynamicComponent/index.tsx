@@ -8,9 +8,9 @@ interface IDynamicComponentProps {
 }
 
 const DynamicComponent: FC<IDynamicComponentProps> = ({ src, children, ...props }) => {
-  if (!src) {
-    return <div>template is empty</div>;
-  }
+  // if (!src) {
+  //   return <div>template is empty</div>;
+  // }
   const Component = useMemo(() => {
     return lazy(() => fetchComponent(src));
   }, [src]);

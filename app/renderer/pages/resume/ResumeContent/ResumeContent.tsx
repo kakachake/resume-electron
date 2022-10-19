@@ -9,12 +9,25 @@ import styles from './ResumeContent.module.less';
 import { ResumeModals } from '../ResumeModals';
 import { IntactResume } from '@root/app/renderer/common/types/resume';
 import { useHeight } from '@root/app/renderer/hooks/useHeight';
+import { useParams } from 'react-router-dom';
+import { Template } from '@root/app/renderer/store/slice/template';
 
 const ResumeContent: FC = () => {
-  const { selectedTemplate } = useAppSelector((state) => state.template);
-  useMemo(() => {
-    console.log('ResumeContent', 'render');
-  }, []);
+  const [template, setTemplate] = useState<Template>();
+  const { selectedTemplate, templateList } = useAppSelector((state) => state.template);
+  const { id } = useParams();
+  useEffect(() => {
+    let _template = selectedTemplate;
+    if (id) {
+      const template = templateList.find((item) => item.id === id);
+      if (template) {
+        _template = template;
+      }
+    }
+    if (_template) {
+      setTemplate(_template);
+    }
+  }, [id, selectedTemplate]);
 
   const [height, setHeight] = useHeight(100);
 
@@ -39,7 +52,7 @@ const ResumeContent: FC = () => {
         title={'简历制作平台'}
         resume={resume}
         resumeToolbarKeys={resumeToolbarKeys}
-        src={selectedTemplate?.url || ''}
+        src={template?.url || ''}
       />
     </ReScrollBox>
   );
