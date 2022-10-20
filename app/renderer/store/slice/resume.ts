@@ -148,7 +148,18 @@ export const resumeSlice = createSlice({
 });
 
 function createResumeItem(key: string) {
-  return {};
+  switch (key) {
+    case 'skill':
+    case 'certificate':
+    case 'projectExperience':
+    case 'workExperience':
+    case 'schoolExperience':
+      return [];
+    case 'evaluation':
+      return '';
+    default:
+      return {};
+  }
 }
 
 export const { setToolBarList, addResume, removeResume, updateResume } =

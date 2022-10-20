@@ -35,11 +35,11 @@ export const RESUME_TOOLBAR_LIST: SliderItem[] = [
     summary: '少侠，请留下你的联系方式',
     require: true,
   },
-  {
-    key: RESUME_TOOLBAR_MAPS.schoolExperience,
-    name: '在校经历',
-    summary: '展示在校任职成果和人际关系',
-  },
+  // {
+  //   key: RESUME_TOOLBAR_MAPS.schoolExperience,
+  //   name: '在校经历',
+  //   summary: '展示在校任职成果和人际关系',
+  // },
   {
     key: RESUME_TOOLBAR_MAPS.projectExperience,
     name: '项目经验',
