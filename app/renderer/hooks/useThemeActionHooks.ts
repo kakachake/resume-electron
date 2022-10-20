@@ -1,4 +1,4 @@
-import { getAppPath } from '@src/utils/appPath';
+import { getUserDataPath } from '@src/utils/appPath';
 import { useEffect } from 'react';
 import { useAppDispatch } from '../store';
 import path from 'path';
@@ -50,15 +50,27 @@ export function changeCssVars(theme: TSTheme.Item) {
 
 export function updateAppConfigThemeFile(key: string, value: any) {
   return new Promise((resolve, reject) => {
-    getAppPath().then((appPath: string) => {
+    getUserDataPath().then((appPath: string) => {
       const jsonPath = path.join(appPath, 'appConfig/theme.config.json');
       readAppConfigThemeFile().then((theme) => {
+        console.log(key, value);
+        console.log(theme);
+
         const nextConfig = { ...theme, [key]: value };
-        fileAction.canRead(jsonPath).then(() => {
-          fileAction.write(jsonPath, nextConfig, 'utf8').then(() => {
-            resolve(true);
+        console.log(nextConfig);
+
+        fileAction
+          .canRead(jsonPath)
+          .then(() => {
+            fileAction.write(jsonPath, nextConfig, 'utf8').then(() => {
+              console.log('write success');
+
+              resolve(true);
+            });
+          })
+          .catch((err) => {
+            reject(err);
           });
-        });
       });
     });
   });
@@ -76,10 +88,10 @@ export function readAppConfigThemeFile(): Promise<ThemeStore> {
         });
       });
     } else {
-      import('@src/utils/appPath').then(({ getAppPath }) => {
+      import('@src/utils/appPath').then(({ getUserDataPath }) => {
         import('@src/utils/file').then(({ default: fileAction }) => {
           import('path').then((path) => {
-            getAppPath().then((appPath: string) => {
+            getUserDataPath().then((appPath: string) => {
               const jsonPath = path.join(appPath, 'appConfig/theme.config.json');
 
               fileAction

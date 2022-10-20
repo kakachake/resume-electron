@@ -7,6 +7,7 @@ import ReButton from '../../ReButton/ReButton';
 import ReactDOM, { createPortal, unmountComponentAtNode } from 'react-dom';
 import { createRoot, Root } from 'react-dom/client';
 import React from 'react';
+import { useClickAway } from '@root/app/renderer/hooks/useClickAwayHook';
 const ReDialog: FC<IDialogModal> & {
   confirm: (config: IDialogModal) => void;
 } = ({
@@ -27,6 +28,8 @@ const ReDialog: FC<IDialogModal> & {
       onClose && onClose();
     }
   }, [visible]);
+  console.log('visible', visible);
+
   const cancelBtn = config.cancelBtn
     ? { show: true, ...config.cancelBtn }
     : ({ show: false } as BtnConfig);
@@ -36,74 +39,80 @@ const ReDialog: FC<IDialogModal> & {
   const deleteBtn = config.deleteBtn
     ? { show: true, ...config.deleteBtn }
     : ({ show: false } as BtnConfig);
-  const renderDialog = () => (
-    <div className={styles['re-portal']}>
-      <div className={styles['re-modal-mask']}></div>
-      <div className={styles['re-modal-wrap']}>
-        <div
-          className={cName(styles['re-modal'], styles['re-modal-transition'])}
-          style={{
-            width: `${width}px`,
-          }}
-        >
-          <div className={styles['re-modal-content']}>
-            <div className={styles['re-modal-header']}>
-              <h5 className={styles['re-modal-header-title']}>{title}</h5>
-              <div
-                onClick={() => {
-                  cancelBtn?.callback
-                    ? Promise.resolve(cancelBtn.callback()).then(() => {
-                        onClose && onClose();
-                      })
-                    : onClose && onClose();
-                }}
-                className={styles['re-modal-close-icon']}
-              >
-                <img src={cancel} alt="" />
+  const RenderDialog = () => {
+    const [maskRef] = useClickAway(onClose);
+    console.log('render');
+
+    return (
+      <div className={styles['re-portal']}>
+        <div className={styles['re-modal-mask']}></div>
+        <div className={styles['re-modal-wrap']}>
+          <div
+            ref={maskRef}
+            className={cName(styles['re-modal'], styles['re-modal-transition'])}
+            style={{
+              width: `${width}px`,
+            }}
+          >
+            <div className={styles['re-modal-content']}>
+              <div className={styles['re-modal-header']}>
+                <h5 className={styles['re-modal-header-title']}>{title}</h5>
+                <div
+                  onClick={() => {
+                    cancelBtn?.callback
+                      ? Promise.resolve(cancelBtn.callback()).then(() => {
+                          onClose && onClose();
+                        })
+                      : onClose && onClose();
+                  }}
+                  className={styles['re-modal-close-icon']}
+                >
+                  <img src={cancel} alt="" />
+                </div>
               </div>
-            </div>
-            <div>{children}</div>
-            {showFooter && (
-              <div className={styles['re-modal-footer']}>
-                {renderFooter ||
-                  (cancelBtn?.show && (
+              <div>{children}</div>
+              {showFooter && (
+                <div className={styles['re-modal-footer']}>
+                  {renderFooter ||
+                    (cancelBtn?.show && (
+                      <ReButton
+                        size="middle"
+                        type="default"
+                        className="vis-dialog-footer-btn vis-dialog-footer-cancel-btn"
+                        onClick={() => {
+                          cancelBtn?.callback &&
+                            Promise.resolve(cancelBtn.callback()).then(() => {
+                              onClose && onClose();
+                            });
+                        }}
+                      >
+                        {cancelBtn?.text || '取消'}
+                      </ReButton>
+                    ))}
+                  {submitBtn?.show && (
                     <ReButton
                       size="middle"
-                      type="default"
-                      className="vis-dialog-footer-btn vis-dialog-footer-cancel-btn"
+                      className="vis-dialog-footer-btn vis-dialog-footer-submit-btn"
                       onClick={() => {
-                        cancelBtn?.callback &&
-                          Promise.resolve(cancelBtn.callback()).then(() => {
-                            onClose && onClose();
-                          });
+                        submitBtn?.callback
+                          ? Promise.resolve(submitBtn.callback()).finally(() => {
+                              onClose && onClose();
+                            })
+                          : onClose && onClose();
                       }}
                     >
-                      {cancelBtn?.text || '取消'}
+                      {submitBtn?.text || '确定'}
                     </ReButton>
-                  ))}
-                {submitBtn?.show && (
-                  <ReButton
-                    size="middle"
-                    className="vis-dialog-footer-btn vis-dialog-footer-submit-btn"
-                    onClick={() => {
-                      submitBtn?.callback
-                        ? Promise.resolve(submitBtn.callback()).finally(() => {
-                            onClose && onClose();
-                          })
-                        : onClose && onClose();
-                    }}
-                  >
-                    {submitBtn?.text || '确定'}
-                  </ReButton>
-                )}
-              </div>
-            )}
+                  )}
+                </div>
+              )}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  );
-  return visible ? createPortal(renderDialog(), document.body) : <></>;
+    );
+  };
+  return visible ? createPortal(<RenderDialog />, document.body) : <></>;
 };
 
 ReDialog.confirm = (config: IDialogModal) => {

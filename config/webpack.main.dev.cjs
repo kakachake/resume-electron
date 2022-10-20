@@ -5,6 +5,7 @@ const { merge } = require('webpack-merge');
 const isDev = process.env.NODE_ENV === 'development';
 
 module.exports = mainConfig = merge(baseConfig, {
+  resolve: { extensions: ['.js', '.ts'] },
   mode: isDev ? 'development' : 'production',
   devtool: 'source-map',
   entry: path.resolve(__dirname, '../app/main/electron.ts'),

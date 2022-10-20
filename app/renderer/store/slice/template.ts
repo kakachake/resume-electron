@@ -14,29 +14,7 @@ export interface TemplateState {
 }
 
 const initialState: TemplateState = {
-  templateList: [
-    {
-      name: 'template1',
-      url: 'http://192.168.0.4:3030/bundle.js',
-      cover: 'http://192.168.0.4:3030/preview.jpg',
-      previewJson: 'http://192.168.0.4:3030/preview.json',
-      id: '1',
-    },
-    {
-      name: 'template1',
-      url: 'http://192.168.0.4:3030/bundle.js',
-      cover: 'http://192.168.0.4:3030/preview.jpg',
-      previewJson: 'http://192.168.0.4:3030/preview1.json',
-      id: '2',
-    },
-    {
-      name: 'template1',
-      url: 'http://192.168.0.4:3030/bundle.js',
-      cover: 'http://192.168.0.4:3030/preview.jpg',
-      previewJson: 'http://192.168.0.4:3030/preview2.json',
-      id: '3',
-    },
-  ],
+  templateList: [],
   selectedTemplate: null,
 };
 

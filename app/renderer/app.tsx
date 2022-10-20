@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useEffect } from 'react';
 import './styles/iconfont/iconfont.css';
 import { HashRouter } from 'react-router-dom';
 import { GetRoute } from './router/index';

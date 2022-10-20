@@ -13,3 +13,19 @@ export function getAppPath(): Promise<string> {
     });
   });
 }
+
+export function getUserDataPath(): Promise<string> {
+  return new Promise((resolve, reject) => {
+    ipcRenderer.send('getUserDataPath');
+    ipcRenderer.on('replyUserDataPath', function cb(event, arg: string) {
+      if (arg) {
+        console.log(arg);
+
+        resolve(arg);
+      } else {
+        reject(new Error('getUserDataPath failed'));
+      }
+      ipcRenderer.removeListener('replyUserDataPath', cb);
+    });
+  });
+}

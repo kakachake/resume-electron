@@ -3,7 +3,11 @@ const { merge } = require('webpack-merge');
 const baseConfig = require('./webpack.base.cjs');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const PreloadWebpackPlugin = require('@vue/preload-webpack-plugin');
-
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CssMinimizerPlugin = require('css-minimizer-webpack-plugin');
+const TerserWebpackPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const isDev = process.env.NODE_ENV === 'development';
 module.exports = renderConfig = merge(baseConfig, {
   mode: 'development',
   devtool: 'source-map',
@@ -13,8 +17,9 @@ module.exports = renderConfig = merge(baseConfig, {
   },
   target: 'electron-renderer',
   output: {
-    filename: '[name].[hashContent].js',
+    filename: 'js/[name].[contenthash].js',
     path: path.resolve(__dirname, '../dist/'),
+    clean: true,
   },
   module: {
     rules: [
@@ -29,12 +34,12 @@ module.exports = renderConfig = merge(baseConfig, {
       },
       {
         test: /\.css/,
-        use: ['style-loader', 'css-loader', 'postcss-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'postcss-loader'],
       },
       {
         test: /\.less/,
         use: [
-          'style-loader',
+          MiniCssExtractPlugin.loader,
           {
             loader: 'css-loader',
             options: {
@@ -63,14 +68,43 @@ module.exports = renderConfig = merge(baseConfig, {
     new PreloadWebpackPlugin({
       rel: 'preload', // preload兼容性更好
       as: 'script',
-      // rel: 'prefetch' // prefetch兼容性更差
+    }),
+    new CopyWebpackPlugin({
+      patterns: [
+        {
+          from: path.resolve(__dirname, '../assets'),
+          to: path.resolve(__dirname, '../dist/assets'),
+        },
+        // {
+        //   from: path.resolve(__dirname, '../appConfig'),
+        //   to: path.resolve(__dirname, '../dist/appConfig'),
+        // },
+      ],
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css',
     }),
   ],
   devServer: {
     static: path.resolve(__dirname, '../dist/'),
     compress: true,
-    host: '127.0.0.1', // webpack-dev-server启动时要指定ip，不能直接通过localhost启动，不指定会报错
+    host: 'localhost', // webpack-dev-server启动时要指定ip，不能直接通过localhost启动，不指定会报错
     port: 7001, // 启动端口为 7001 的服务
     hot: true,
+  },
+  optimization: {
+    minimize: isDev ? false : true,
+    splitChunks: {
+      chunks: 'all',
+    },
+    runtimeChunk: {
+      name: (entrypoint) => `runtime~${entrypoint.name}`,
+    },
+    minimizer: [
+      new CssMinimizerPlugin(),
+      new TerserWebpackPlugin({
+        extractComments: false,
+      }),
+    ],
   },
 });

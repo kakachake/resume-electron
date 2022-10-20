@@ -1,0 +1,23 @@
+[
+  {
+    "name": "template1",
+    "url": "http://101.43.155.53/resume/template1/bundle.js",
+    "cover": "http://101.43.155.53/resume/template1/preview.jpg",
+    "previewJson": "http://101.43.155.53/resume/template1/preview.json",
+    "id": "1"
+  },
+  {
+    "name": "template1",
+    "url": "http://101.43.155.53/resume/template1/bundle.js",
+    "cover": "http://101.43.155.53/resume/template1/preview.jpg",
+    "previewJson": "http://101.43.155.53/resume/template1/preview1.json",
+    "id": "2"
+  },
+  {
+    "name": "template1",
+    "url": "http://101.43.155.53/resume/template1/bundle.js",
+    "cover": "http://101.43.155.53/resume/template1/preview.jpg",
+    "previewJson": "http://101.43.155.53/resume/template1/preview2.json",
+    "id": "3"
+  }
+]

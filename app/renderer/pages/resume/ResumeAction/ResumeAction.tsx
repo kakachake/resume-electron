@@ -7,7 +7,7 @@ import {
 } from '@root/app/renderer/hooks/useReadGlobalConfigFile';
 import { useAppSelector } from '@root/app/renderer/store';
 import { createUID } from '@root/app/renderer/utils';
-import { getAppPath } from '@root/app/renderer/utils/appPath';
+import { getUserDataPath } from '@root/app/renderer/utils/appPath';
 import fileAction from '@root/app/renderer/utils/file';
 import { intToDateString } from '@root/app/renderer/utils/time';
 import path from 'path';
@@ -29,7 +29,7 @@ const ResumeAction: FC = () => {
         if (config.resumeSavePath) {
           saveResumeJson(config.resumeSavePath);
         } else {
-          getAppPath().then((appPath) => {
+          getUserDataPath().then((appPath) => {
             updateGlobalConfigFile('resumeSavePath', path.join(appPath, 'resumeCache'));
             saveResumeJson(appPath);
           });
