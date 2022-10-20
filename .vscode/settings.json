@@ -1,3 +1,8 @@
 {
-  "commentTranslate.targetLanguage": "en"
+  "commentTranslate.targetLanguage": "en",
+  "pasteImage.path": "${currentFileDir}/screenShot/${currentFileName}",
+  "pasteImage.basePath": "${currentFileDir}/screenShot",
+  "pasteImage.forceUnixStyleSeparator": true,
+  "pasteImage.prefix": "/",
+  "pasteImage.insertPattern": "${imageSyntaxPrefix}./screenShot/${currentFileName}/${imageFileName}${imageSyntaxSuffix}"
 }

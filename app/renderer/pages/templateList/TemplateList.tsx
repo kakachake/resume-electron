@@ -6,6 +6,7 @@ import styles from './TemplateList.module.less';
 import TemplatePreview from './templatePreview/TemplatePreview';
 import cName from 'classnames';
 import { useAppSelector } from '../../store';
+import { IconChevronLeft } from '@douyinfe/semi-icons';
 
 const TemplateList: FC = () => {
   const [hide, setHide] = useState(false);
@@ -28,7 +29,13 @@ const TemplateList: FC = () => {
               className={cName(styles['rect-icon'], {
                 [styles['rect-icon-hidden']]: hide,
               })}
-            ></div>
+            >
+              <IconChevronLeft
+                style={{
+                  fontSize: '24px',
+                }}
+              />
+            </div>
           </div>
         </div>
         <div
