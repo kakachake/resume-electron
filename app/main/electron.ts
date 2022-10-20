@@ -20,7 +20,8 @@ function createWindow() {
     height: 800,
 
     webPreferences: {
-      devTools: isDev(),
+      // devTools: isDev(),
+      devTools: true,
       nodeIntegration: true,
       contextIsolation: false,
     },

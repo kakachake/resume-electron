@@ -52,7 +52,7 @@ const ResumeContent: FC = () => {
         title={'简历制作平台'}
         resume={resume}
         resumeToolbarKeys={resumeToolbarKeys}
-        src={'http://192.168.0.4:3030/bundle.js' || ''}
+        src={template?.url || 'http://192.168.0.4:3030/bundle.js'}
       />
     </ReScrollBox>
   );
